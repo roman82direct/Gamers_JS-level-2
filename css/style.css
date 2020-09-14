@@ -186,7 +186,7 @@ input[type="text"]:focus {
 }
 .gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 350px);
+  grid-template-columns: repeat(auto-fit, 300px);
   justify-content: center;
   justify-items: center;
   grid-gap: 30px;
@@ -541,11 +541,16 @@ footer {
 .shedule {
   list-style-type: none;
   margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  justify-content: center;
+  align-items: center;
+  grid-gap: 10px;
 }
 .kartinki {
   text-decoration: none;
-  margin-right: 10px;
-  float: left;
+  /* margin-right: 10px;
+  float: left; */
 }
 .small_Img:hover {
   cursor: pointer;
@@ -612,6 +617,7 @@ footer {
 }
 .gametext {
   margin-top: 90px;
+  margin-bottom: 30px;
   min-width: 463px;
   min-height: 153px;
   color: #696969;
