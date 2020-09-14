@@ -1,0 +1,149 @@
+  /* Модальное окно карточки товара */
+  .modalGood {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+.modalGood_content {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+    margin: 3% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 70%;
+    height: 80%;
+    z-index: 99999;
+    align-items: center;
+    border-radius: 10px;
+}
+.close_modal {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: end;
+    margin-left: 90%;
+}
+#mText {
+margin-top: 10%;
+text-align: center;
+}
+
+  /* Модальное окно для заказа товара */
+.modalOrder {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+.modalOrder_content {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+    margin: 13% auto 0;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    height: 40%;
+    z-index: 99999;
+    align-items: center;
+    border-radius: 10px;
+}
+.close_modal_order {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: end;
+    margin-left: 90%;
+}
+.quantOrder {
+    height: 50px;
+    width: 100px;
+    font-size: 3em;
+    margin: 20px 0 50px 0;
+}
+.orderTitle {
+    color: red;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.yesNo {
+width: 60%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+margin-top: 2%;
+}
+.ok,
+.cancel {
+cursor: pointer;
+font-size: 1.5rem;
+font-weight: 400;
+}
+.ok:hover,
+.cancel:hover {
+text-shadow: 1px 1px 1px black;
+}
+
+/* Модальное окно корзины */
+.modalBasket {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+.modalBasket_content {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+    margin: 10% auto 0;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%;
+    height: 60%;
+    z-index: 99999;
+    align-items: center;
+    border-radius: 10px;
+}
+.close_modal_basket {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: end;
+    margin-left: 90%;
+}
+.basketItem {
+    width: 90%;
+    padding: 10px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid;
+}
