@@ -35,7 +35,6 @@ main {
   float: left;
   height: 83px;
   width: 171px;
-  /*margin-left: 475px;*/
 }
 .logotext1 {
   position: absolute;
@@ -382,13 +381,13 @@ input[type="text"]:focus {
   clear: both;
   margin: 0 auto;
   max-width: 1920px;
-  padding: 174px 0 90px;
+  padding: 96px 0 90px;
 }
 .contus {
   text-align: center;
   margin-bottom: 89px;
   color: #f44336;
-  font-family: "Poppins";
+  font-family: "Helvetica";
   font-size: 36px;
   font-weight: 600;
   line-height: 48px;
@@ -469,7 +468,7 @@ fieldset .contformtxt:focus,
   margin-top: 96px;
   margin-bottom: 25px;
   color: #f44336;
-  font-family: "Poppins";
+  font-family: "Helvetica";
   font-size: 36px;
   font-weight: 600;
   line-height: 48px;
@@ -484,8 +483,8 @@ fieldset .contformtxt:focus,
   height: 40px;
   margin-right: 55px;
   position: absolute;
-  margin-left: 1800px;
-  margin-top: -100px;
+  margin-left: 93%;
+  margin-top: 910px;
   transition: transform 0.8s;
   -webkit-transition: -webkit-transform 0.8s ease-in-out;
   -ms-transition: -ms-transform 0.8s ease-in-out;
@@ -521,9 +520,13 @@ footer {
 }
 /*Стили для карточки товара*/
 .gamecard {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap-reverse;
   max-width: 1070px;
   min-height: 400px;
-  margin: 75px auto;
+  margin: 20px auto;
 }
 .leftpart {
   width: 500px;
