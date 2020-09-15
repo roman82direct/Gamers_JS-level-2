@@ -1,4 +1,4 @@
-var goods = [
+let goods = [
     {
     id: 1,
     title: 'assassin’s creed: rogue',
@@ -45,4 +45,4 @@ var goods = [
     }
 ];
 
-var order = [];// корзина
+let order = [];// корзина

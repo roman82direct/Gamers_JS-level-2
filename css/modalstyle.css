@@ -125,7 +125,7 @@ text-shadow: 1px 1px 1px black;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
-    height: 60%;
+    min-height: 60%;
     z-index: 99999;
     align-items: center;
     border-radius: 10px;

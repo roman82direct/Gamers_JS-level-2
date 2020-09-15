@@ -1,35 +1,23 @@
 //Заполнение галереи карточками товаров
-function createCard(){
-    for (var i = 0; i < goods.length; i++){
-        var card = document.createElement('div');
-        card.className = ('galitem');
-        card.id = ('card_' + i);
-        var imgGal = document.createElement('img');
-        imgGal.src = goods[i].photoForGallery[0];
-        card.insertAdjacentElement('afterbegin', imgGal);
-        var title = document.createElement('p');
-        title.id = ('title_' + i);
-        title.innerText = goods[i].title;
-        card.appendChild(title);
-        var price = document.createElement('p');
-        price.innerText = 'Цена: ' + goods[i].price + ' руб.';
-        price.id = ('price_' + i);
-        price.style.fontSize = '16px';
-        price.style.fontWeight= '600';
-        card.appendChild(price);
-        var buy = document.createElement('a');
-        buy.id = ('buy_' + i);
-        buy.className = 'buy';
-        buy.innerText = 'КУПИТЬ';
-        buy.href = '#';
-        card.appendChild(buy);
-        var over = document.createElement('div');//подложка
-        over.className = ('over1');
-        over.id = ('over_' + i);
-        card.appendChild(over);
-        gallery.appendChild(card);
-    };
+const renderProduct = (goods) => {
+    return `<div id=card_${goods.id-1} class="product-item">
+                <img id=imgcard_${goods.id-1} class='card-img' src = ${goods.photoForGallery[0]}>
+                <h3>${goods.title}</h3>
+                <p>Цена: ${goods.price} руб.</p>
+                <a id='buy_${goods.id-1}' class="buy">Купить</a>
+                <div id='over_${goods.id-1}' class='over1'></div>
+            </div>`
 };
+
+const renderPage = list => {
+    const productsList = list.map(item => renderProduct(item));
+    // console.log(productsList);
+    document.querySelector('.products').innerHTML = productsList.join(''); //убираем запятые
+    // productsList.forEach(item => document.querySelector('.products').innerHTML += item); //или так убираем запятые
+};
+
+var gallery = document.querySelector('.products');
+var body = document.getElementsByTagName('body')[0];
 
 //модальное окно на каждую карточку товара
 function createModalCard(){

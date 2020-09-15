@@ -1,13 +1,15 @@
-var gallery = document.querySelector('.gallery');
-var body = document.getElementsByTagName('body')[0];
+renderPage(goods);
 
-window.onload = createCard();
 window.onload = createModalCard();
 window.onload = createModalOrder();
 
-var cards = document.getElementsByClassName('galitem');
-for (var i = 0; i < cards.length; i++){
-    cards[i].addEventListener('click', showModalGood);
+var cardsImg = document.getElementsByClassName('over1');
+for (var i = 0; i < cardsImg.length; i++){
+    cardsImg[i].addEventListener('click', showModalGood);
+};
+var fastBuy = document.getElementsByClassName('buy');
+for (var i = 0; i < fastBuy.length; i++){
+    fastBuy[i].addEventListener('click', showModalOrder);
 };
 
 var buy = document.getElementsByClassName('buygame');
