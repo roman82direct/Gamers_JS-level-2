@@ -1,7 +1,7 @@
 //Заполнение галереи карточками товаров
 const renderProduct = (goods) => {
     return `<div id=card_${goods.id-1} class="product-item">
-                <img id=imgcard_${goods.id-1} class='card-img' src = ${goods.photoForGallery[0]}>
+                <img class='card-img' src = ${goods.photoForGallery[0]}>
                 <h3>${goods.title}</h3>
                 <p>Цена: ${goods.price} руб.</p>
                 <a id='buy_${goods.id-1}' class="buy">Купить</a>
@@ -16,6 +16,7 @@ const renderPage = list => {
     // productsList.forEach(item => document.querySelector('.products').innerHTML += item); //или так убираем запятые
 };
 
+//--------------------------------------------------------------------------------------
 var gallery = document.querySelector('.products');
 var body = document.getElementsByTagName('body')[0];
 
@@ -115,6 +116,11 @@ function showModalGood(event){
             modal.style.display = "none";
         }
     }
+    window.onkeydown = (event) => {
+         if (event.code == 'Escape'){
+            close.onclick();
+        }
+    } 
 };
 
 //показ больших фото в галерее при клике на малое фото
@@ -228,6 +234,16 @@ function showModalOrder(event){
             quant.value = '1';
         }
     }
+    window.onkeydown = (event) => {
+        // console.log(event);
+        if (event.code == 'Enter'|| event.code == 'NumpadEnter'){
+            ok.onclick();
+            window.onkeydown = null;
+        } else if
+         (event.code == 'Escape'){
+            cancel.onclick();
+        }
+    } 
 };
 
 //модальное окно корзины
@@ -306,6 +322,11 @@ function showBasket(){
             header.innerText = '';
         }
     }
+    window.onkeydown = (event) => {
+        if (event.code == 'Enter'|| event.code == 'NumpadEnter' || event.code == 'Escape'){
+            cancel.onclick();
+        }
+    } 
 };
 
 //показ больших фото в галерее при клике на стрелку
