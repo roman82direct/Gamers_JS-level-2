@@ -1,4 +1,6 @@
-renderPage(goods);
+let goodsList = new ProductsList();
+goodsList.renderList();
+goodsList.calcListCost();
 
 window.onload = createModalCard();
 window.onload = createModalOrder();

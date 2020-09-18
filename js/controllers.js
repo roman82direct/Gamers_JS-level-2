@@ -1,20 +1,62 @@
-//Заполнение галереи карточками товаров
-const renderProduct = (goods) => {
-    return `<div id=card_${goods.id-1} class="product-item">
-                <img class='card-img' src = ${goods.photoForGallery[0]}>
-                <h3>${goods.title}</h3>
-                <p>Цена: ${goods.price} руб.</p>
-                <a id='buy_${goods.id-1}' class="buy">Купить</a>
-                <div id='over_${goods.id-1}' class='over1'></div>
-            </div>`
-};
+//класс карточки товара
+class ProductItem{
+    constructor(good){
+       this.title = good.title;
+       this.price = good.price;
+       this.id = good.id;
+       this.imgSrc = good.photoForGallery[0];
+    }
+    renderProductItem(){
+        return `<div id=card_${this.id-1} class="product-item">
+        <img class='card-img' src = '${this.imgSrc}'>
+        <h3>${this.title}</h3>
+        <p>Цена: ${this.price} руб.</p>
+        <a id='buy_${this.id-1}' class="buy">Купить</a>
+        <div id='over_${this.id-1}' class='over1'></div>
+    </div>`
+    }
+}
 
-const renderPage = list => {
-    const productsList = list.map(item => renderProduct(item));
-    // console.log(productsList);
-    document.querySelector('.products').innerHTML = productsList.join(''); //убираем запятые
-    // productsList.forEach(item => document.querySelector('.products').innerHTML += item); //или так убираем запятые
-};
+// класс списка товаров в галерее
+class ProductsList{
+    constructor(container = '.products'){
+        this.container = container;
+        this.goods = goods;
+    }
+    renderList(){
+        let innerDiv = document.querySelector(this.container);
+        for (let item of this.goods){
+            let goodItem = new ProductItem(item);
+            innerDiv.insertAdjacentHTML('beforeend', goodItem.renderProductItem()); 
+        }
+    }
+    calcListCost(){
+        let total = 0;
+        this.goods.forEach(function(item){
+            total += item.price;
+        })
+        console.log(`Стоимость товаров в каталоге - ${total}`);    
+    }
+}
+//-------------------------------------------------------------
+
+//Заполнение галереи карточками товаров
+// const renderProduct = (goods) => {
+//     return `<div id=card_${goods.id-1} class="product-item">
+//                 <img class='card-img' src = ${goods.photoForGallery[0]}>
+//                 <h3>${goods.title}</h3>
+//                 <p>Цена: ${goods.price} руб.</p>
+//                 <a id='buy_${goods.id-1}' class="buy">Купить</a>
+//                 <div id='over_${goods.id-1}' class='over1'></div>
+//             </div>`
+// };
+
+// const renderPage = list => {
+//     const productsList = list.map(item => _renderProductItem(item));
+//     // console.log(productsList);
+//     document.querySelector('.products').innerHTML = productsList.join(''); //убираем запятые
+//     // productsList.forEach(item => document.querySelector('.products').innerHTML += item); //или так убираем запятые
+// };
 
 //--------------------------------------------------------------------------------------
 var gallery = document.querySelector('.products');
@@ -222,6 +264,7 @@ function showModalOrder(event){
         quant.value = '1';
         basket.innerHTML += ' *';
         basket.style.color = 'red';
+        window.onkeydown = null;
     }
     cancel.onclick = function(){
         modalOrder.style.display = 'none';
