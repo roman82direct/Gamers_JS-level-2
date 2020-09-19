@@ -5,6 +5,7 @@ class ProductItem{
        this.price = good.price;
        this.id = good.id;
        this.imgSrc = good.photoForGallery[0];
+       this.ctock = good.quant;
     }
     renderProductItem(){
         return `<div id=card_${this.id-1} class="product-item">
@@ -33,7 +34,7 @@ class ProductsList{
     calcListCost(){
         let total = 0;
         this.goods.forEach(function(item){
-            total += item.price;
+            total += item.price * item.quant;
         })
         console.log(`Стоимость товаров в каталоге - ${total}`);    
     }
@@ -51,40 +52,41 @@ class ItemInBasket{
     renderBasketItem(){
         return `<div id=card_${this.id} class="basketItem">
         <img style="height: 80px" src = '${this.imgSrc}'>
-        <p>${this.title}. </p>
-        <p>Арт.: ${this.id} </p>
-        <p>Цена: ${this.price} руб.</p>
-        <p>Количество: ${this.quantity} шт.</p>
-        <h3>ИТОГО: ${this.totalItemCost()} руб.</h3>
+        <p class="basketItemTitle">${this.title}. </p>
+        <p class="basketItemArt">Арт.: ${this.id} </p>
+        <p class="basketItemPrice">Цена: ${this.price} руб.</p>
+        <p class="basketItemQuant">Количество: ${this.quantity} шт.</p>
+        <h3 class="basketItemTotal">ИТОГО: ${this.totalItemCost()} руб.</h3>
         <a id='change_${this.id}' class="changeBasket">Изменить</a>
         <a id='del_${this.id}' class="changeBasket">Удалить</a>
     </div>`
     }
 
-    totalItemCost(){
+    totalItemCost(){ //суммарная стоимость заказанной позиции
         return this.price * this.quantity;
     }
 
-    deleteItem(){
+    deleteItem(){   // удалить позицию из корзины
 
     }
-    changeItem(){
+
+    changeItem(){   // изменить количество заказанной позиции
         
     }
 }
 
 // Класс списка товаров в корзине
 class BasketList{
-    constructor(container = '.modalBasket_content'){
+    constructor(container = '.modalBasket_list'){
         this.container = container;
         this.goods = order;
     }
     renderBasketList(){
         let innerBasket = document.querySelector(this.container);
+        innerBasket.innerHTML = '';
         for (let item of this.goods){
             let goodBasketItem = new ItemInBasket(item);
             innerBasket.insertAdjacentHTML('beforeend', goodBasketItem.renderBasketItem());
-            console.log(goodBasketItem.renderBasketItem());
         }
     }
     calcTotalCost(){
@@ -93,6 +95,14 @@ class BasketList{
            totalBasket += item.price * item.quantOrder;
         })
         return totalBasket;
+    }
+
+    makeOrder(){    // оформить заказ
+
+    }
+
+    clearBasket(){    // удалить всё из корзины
+
     }
 }
 
@@ -329,21 +339,11 @@ function showModalOrder(event){
 
 //модальное окно корзины
 function showBasket(){
-    var modalBasket = document.createElement('div');
-    modalBasket.className = 'modalBasket';
-    modalBasket.id = 'modalBasket';
-    body.insertAdjacentElement('beforeend', modalBasket);
-    var modalBasketContent = document.createElement('div');
-    modalBasketContent.className = 'modalBasket_content';
-    modalBasketContent.id = 'modalBasketContent';
-    modalBasket.appendChild(modalBasketContent);
-    var closeModalBasket = document.createElement('span');
-    closeModalBasket.className = 'close_modal_basket';
-    closeModalBasket.id = 'closeModalBasket';
-    closeModalBasket.innerText = 'X';
-    modalBasketContent.appendChild(closeModalBasket);
-    var header = document.createElement('h3');
-    modalBasketContent.appendChild(header);
+    let modalBasket = document.querySelector('.modalBasket');
+    let closeModalBasket = document.querySelector('.close_modal_basket');
+    let header = document.getElementById('basketHeader');
+    // let ok = document.getElementById('ok');
+    let cancel = document.getElementById('cancel');
     if (order.length == 0){
         header.innerText = 'В корзине нет товаров';
     } else {
@@ -352,23 +352,10 @@ function showBasket(){
             total += order[i].quantOrder * order[i].price;
         }
         header.innerText = `Количество товаров в корзине: ${order.length}. На сумму ${total} рублей`;
-        
-        let basketItemList = new BasketList;
-        basketItemList.renderBasketList();
     }
-    var block = document.createElement('div');
-    block.className = 'yesNo';
-    var ok = document.createElement('p');
-    ok.className = 'ok';
-    ok.innerText = 'Заказать'
-    var cancel = document.createElement('p');
-    cancel.className = 'cancel';
-    cancel.innerText = 'ОТМЕНА'
-    block.appendChild(ok);
-    block.appendChild(cancel);
-    modalBasketContent.appendChild(block);
 
     modalBasket.style.display = 'block';
+
     closeModalBasket.onclick = function(){
         modalBasket.style.display = 'none';
         header.innerText = '';

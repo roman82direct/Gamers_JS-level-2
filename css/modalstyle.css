@@ -130,6 +130,12 @@ text-shadow: 1px 1px 1px black;
     align-items: center;
     border-radius: 10px;
 }
+.modalBasket_list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
 .close_modal_basket {
     color: #aaa;
     float: right;
@@ -147,6 +153,24 @@ text-shadow: 1px 1px 1px black;
     justify-content: space-between;
     align-items: center;
     border: 1px solid;
+}
+.basketItemTitle {
+    width: 200px;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.basketItemArt {
+    width: 50px;
+}
+.basketItemPrice {
+    width: 80px;
+}
+.basketItemQuant {
+    width: 80px;
+}
+.basketItemTotal {
+    width: 200px;
+    margin-left: 10px;
 }
 .changeBasket{
     text-decoration: none;

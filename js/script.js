@@ -25,7 +25,12 @@ for (var i = 0; i < small.length; i++){
 };
 
 let basket = document.getElementById('basket');
-basket.onclick = showBasket;
+basket.onclick = () => {
+    showBasket();
+    let basketItemList = new BasketList;
+    basketItemList.renderBasketList();
+    console.log(basketItemList.calcTotalCost());
+}
 
 var prev = document.getElementsByClassName('prev');
 for (var i = 0; i < prev.length; i++){
