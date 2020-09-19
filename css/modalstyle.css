@@ -124,7 +124,7 @@ text-shadow: 1px 1px 1px black;
     margin: 10% auto 0;
     padding: 20px;
     border: 1px solid #888;
-    width: 50%;
+    width: 60%;
     min-height: 60%;
     z-index: 99999;
     align-items: center;
@@ -148,3 +148,17 @@ text-shadow: 1px 1px 1px black;
     align-items: center;
     border: 1px solid;
 }
+.changeBasket{
+    text-decoration: none;
+    width: 60px;
+    height: 20px;
+    border-radius: 2px;
+    background-color: #f44336;
+    color: #ffffff;
+    font-family: Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 12px;
+    padding: 5px 5px 0px;
+    margin-left: 10px;
+  }

@@ -1,4 +1,4 @@
-//класс карточки товара
+// Класс карточки товара
 class ProductItem{
     constructor(good){
        this.title = good.title;
@@ -17,7 +17,7 @@ class ProductItem{
     }
 }
 
-// класс списка товаров в галерее
+// Класс списка товаров в галерее
 class ProductsList{
     constructor(container = '.products'){
         this.container = container;
@@ -38,25 +38,63 @@ class ProductsList{
         console.log(`Стоимость товаров в каталоге - ${total}`);    
     }
 }
-//-------------------------------------------------------------
 
-//Заполнение галереи карточками товаров
-// const renderProduct = (goods) => {
-//     return `<div id=card_${goods.id-1} class="product-item">
-//                 <img class='card-img' src = ${goods.photoForGallery[0]}>
-//                 <h3>${goods.title}</h3>
-//                 <p>Цена: ${goods.price} руб.</p>
-//                 <a id='buy_${goods.id-1}' class="buy">Купить</a>
-//                 <div id='over_${goods.id-1}' class='over1'></div>
-//             </div>`
-// };
+// Класс карточки товара в корзине
+class ItemInBasket{
+    constructor(orderGood){
+        this.imgSrc = orderGood.photo;
+        this.id = orderGood.gameId;
+        this.title = orderGood.title;
+        this.price = orderGood.price;
+        this.quantity = orderGood.quantOrder;
+    }
+    renderBasketItem(){
+        return `<div id=card_${this.id} class="basketItem">
+        <img style="height: 80px" src = '${this.imgSrc}'>
+        <p>${this.title}. </p>
+        <p>Арт.: ${this.id} </p>
+        <p>Цена: ${this.price} руб.</p>
+        <p>Количество: ${this.quantity} шт.</p>
+        <h3>ИТОГО: ${this.totalItemCost()} руб.</h3>
+        <a id='change_${this.id}' class="changeBasket">Изменить</a>
+        <a id='del_${this.id}' class="changeBasket">Удалить</a>
+    </div>`
+    }
 
-// const renderPage = list => {
-//     const productsList = list.map(item => _renderProductItem(item));
-//     // console.log(productsList);
-//     document.querySelector('.products').innerHTML = productsList.join(''); //убираем запятые
-//     // productsList.forEach(item => document.querySelector('.products').innerHTML += item); //или так убираем запятые
-// };
+    totalItemCost(){
+        return this.price * this.quantity;
+    }
+
+    deleteItem(){
+
+    }
+    changeItem(){
+        
+    }
+}
+
+// Класс списка товаров в корзине
+class BasketList{
+    constructor(container = '.modalBasket_content'){
+        this.container = container;
+        this.goods = order;
+    }
+    renderBasketList(){
+        let innerBasket = document.querySelector(this.container);
+        for (let item of this.goods){
+            let goodBasketItem = new ItemInBasket(item);
+            innerBasket.insertAdjacentHTML('beforeend', goodBasketItem.renderBasketItem());
+            console.log(goodBasketItem.renderBasketItem());
+        }
+    }
+    calcTotalCost(){
+        let totalBasket = 0;
+        this.goods.forEach(function(item){
+           totalBasket += item.price * item.quantOrder;
+        })
+        return totalBasket;
+    }
+}
 
 //--------------------------------------------------------------------------------------
 var gallery = document.querySelector('.products');
@@ -255,10 +293,10 @@ function showModalOrder(event){
             title: goods[num].title,
             price: goods[num].price,
             quantOrder: parseInt(quant.value),
-            gameId: num
+            gameId: goods[num].id,
+            photo: goods[num].photoForGallery[0]
         }
         order.push(orderGood);   //кладем товар в корзину
-        // console.log(order);
         modalOrder.style.display = 'none';
         modalGood.style.display = "none";
         quant.value = '1';
@@ -312,39 +350,19 @@ function showBasket(){
         var total = 0;
         for (i = 0; i < order.length; i++){
             total += order[i].quantOrder * order[i].price;
-            var basketItem = document.createElement('div');
-            basketItem.className = 'basketItem';
-            basketItem.id = 'item_' + i;
-            var itemImg = document.createElement('img');
-            var n = order[i].gameId;
-            itemImg.src = goods[n].photoForGallery[0];
-            itemImg.style.height = '80px';
-            basketItem.appendChild(itemImg);
-            var itemTitle = document.createElement('p');
-            itemTitle.innerText = order[i].title;
-            basketItem.appendChild(itemTitle);
-            var itemPrice = document.createElement('p');
-            itemPrice.innerText = 'Цена: ' + order[i].price + 'руб.';
-            basketItem.appendChild(itemPrice);
-            var itemQuant = document.createElement('p');
-            itemQuant.innerText = 'Количество: ' + order[i].quantOrder;
-            basketItem.appendChild(itemQuant);
-            var itemTotal = document.createElement('h3');
-            itemTotal.innerText = 'ИТОГО: ' +  order[i].quantOrder * order[i].price + 'руб.';
-            basketItem.appendChild(itemTotal);
-            modalBasketContent.appendChild(basketItem);
         }
-        header.innerText = 'Количество товаров в корзине: ' + order.length + '. На сумму ' + total + ' рублей';
+        header.innerText = `Количество товаров в корзине: ${order.length}. На сумму ${total} рублей`;
+        
+        let basketItemList = new BasketList;
+        basketItemList.renderBasketList();
     }
     var block = document.createElement('div');
     block.className = 'yesNo';
     var ok = document.createElement('p');
     ok.className = 'ok';
-    ok.id = 'toOrder_' + i;
     ok.innerText = 'Заказать'
     var cancel = document.createElement('p');
     cancel.className = 'cancel';
-    cancel.id = 'cancelBasket_' + i;
     cancel.innerText = 'ОТМЕНА'
     block.appendChild(ok);
     block.appendChild(cancel);

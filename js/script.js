@@ -24,7 +24,7 @@ for (var i = 0; i < small.length; i++){
     small[i].onclick = showBig;
 };
 
-var basket = document.getElementById('basket');
+let basket = document.getElementById('basket');
 basket.onclick = showBasket;
 
 var prev = document.getElementsByClassName('prev');
