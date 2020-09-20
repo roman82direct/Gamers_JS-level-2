@@ -303,7 +303,7 @@ function showModalOrder(event){
         quant.value = '1';
     };
     ok.onclick = function(){
-        var orderGood = {        //объект - товар в корзине
+        let orderGood = {        //объект - товар в корзине
             title: goods[num].title,
             price: goods[num].price,
             quantOrder: parseInt(quant.value),
