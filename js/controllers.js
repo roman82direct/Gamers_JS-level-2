@@ -66,6 +66,10 @@ class ItemInBasket{
         return this.price * this.quantity;
     }
 
+    addItem(){   // добавить позицию в корзину
+
+    }
+
     deleteItem(){   // удалить позицию из корзины
 
     }
@@ -337,7 +341,7 @@ function showModalOrder(event){
     } 
 };
 
-//модальное окно корзины
+// управление модальным окном корзины
 function showBasket(){
     let modalBasket = document.querySelector('.modalBasket');
     let closeModalBasket = document.querySelector('.close_modal_basket');
@@ -353,7 +357,6 @@ function showBasket(){
         }
         header.innerText = `Количество товаров в корзине: ${order.length}. На сумму ${total} рублей`;
     }
-
     modalBasket.style.display = 'block';
 
     closeModalBasket.onclick = function(){
