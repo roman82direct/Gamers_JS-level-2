@@ -1,7 +1,11 @@
 let goodsList = new ProductsList();
-goodsList.renderList();
-goodsList.calcListCost();
+console.log(goodsList)// выводит все поля объекта (массив goods заполнен)
+console.log(goodsList.goods)// а здесь возвращает пустой массив. Почему?
 
+goodsList.renderList();
+goodsList.calcListCost();// не работает
+
+// скрипт ниже не работает (все функции завязаны на массив goods)
 window.onload = createModalCard();
 window.onload = createModalOrder();
 

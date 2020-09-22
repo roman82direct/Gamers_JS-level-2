@@ -22,21 +22,37 @@ class ProductItem{
 class ProductsList{
     constructor(container = '.products'){
         this.container = container;
-        this.goods = goods;
+        this.goods = [];//массив товаров из файла json
+        this.allGoods = [];//массив объектов ProductItem
+        this._getProducts()
+        .then(data => {
+            this.goods = [...data];
+            this.renderList()
+        });
+    }
+    _getProducts(){
+        return fetch('response/catalogData.json')
+            .then(result => result.json())
+            .catch(error => {
+                console.log(error);
+            })
     }
     renderList(){
         let innerDiv = document.querySelector(this.container);
         for (let item of this.goods){
             let goodItem = new ProductItem(item);
+            this.allGoods.push(goodItem);
             innerDiv.insertAdjacentHTML('beforeend', goodItem.renderProductItem()); 
         }
     }
     calcListCost(){
-        let total = 0;
-        this.goods.forEach(function(item){
-            total += item.price * item.quant;
-        })
-        console.log(`Стоимость товаров в каталоге - ${total}`);    
+        let sum = this.allGoods.reduce((accum, item) => accum += item.price * item.stock, 0);
+        console.log(`Стоимость товаров в корзине: ${sum}`);
+        // let total = 0;
+        // goods.forEach(function(item){
+        //     total += item.price * item.quant;
+        // })
+        // console.log(`Стоимость товаров в каталоге - ${total}`);    
     }
 }
 
@@ -113,6 +129,7 @@ class BasketList{
 //--------------------------------------------------------------------------------------
 var gallery = document.querySelector('.products');
 var body = document.getElementsByTagName('body')[0];
+
 
 //модальное окно на каждую карточку товара
 function createModalCard(){
