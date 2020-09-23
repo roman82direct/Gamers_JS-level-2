@@ -24,15 +24,68 @@ class ProductItem{
             <h3 class="orderTitle">${this.title}</h3>
             <p>Остаток на складе: ${this.stock} шт.</p>
             <p>Укажите количество к заказу</p>
-            <input type="number" id="quantOrder_${this.id}" class="quantOrder" min="1" max="${this.stock}">
+            <input type="number" id="quantOrder_${this.id}" value="1" class="quantOrder" min="1" max="${this.stock}">
             <div class="yesNo">
                 <span id="ok_${this.id}" class="ok">OK</span>
                 <span id="cancel_${this.id}" class="cancel">ОТМЕНА</span>
             </div>
         </div>
     </div>`
-
     }
+    
+    showModalOrder(event){
+        var button = event.target;
+        var num = button.id.split("_")[1];
+        var modalOrder = document.getElementById('modalOrder_' + num);
+        var closeOrder = document.getElementById('closeModalOrder_' + num);
+        var cancel = document.getElementById('cancel_' + num);
+        var ok = document.getElementById('ok_' + num);
+        var quant = document.getElementById('quantOrder_' + num);
+        // var modalGood = document.getElementById('modalGood_' + num);
+        var basket = document.getElementById('basket');
+        modalOrder.style.display = 'block';
+        closeOrder.onclick = function(){
+            modalOrder.style.display = 'none';
+            quant.value = '1';
+        };
+        ok.onclick = function(){
+            // let orderGood = {        //объект - товар в корзине
+            //     title: goods[num].title,
+            //     price: goods[num].price,
+            //     quantOrder: parseInt(quant.value),
+            //     gameId: goods[num].id,
+            //     photo: goods[num].photoForGallery[0]
+            // }
+            // order.push(orderGood);   //кладем товар в корзину
+            modalOrder.style.display = 'none';
+            // modalGood.style.display = "none";
+            quant.value = '1';
+            basket.innerHTML += ' *';
+            basket.style.color = 'red';
+            window.onkeydown = null;
+        }
+        cancel.onclick = function(){
+            modalOrder.style.display = 'none';
+            quant.value = '1';
+        }
+        window.onclick = function(event) {
+            if (event.target == modalOrder ){//|| event.target == modalGood
+                modalOrder.style.display = "none";
+                // modalGood.style.display = "none";
+                quant.value = '1';
+            }
+        }
+        window.onkeydown = (event) => {
+            if (event.code == 'Enter'|| event.code == 'NumpadEnter'){
+                ok.onclick();
+                window.onkeydown = null;
+            } else if
+             (event.code == 'Escape'){
+                cancel.onclick();
+            }
+        } 
+    };
+
     createItemModalDescription(){
         
     }
@@ -64,8 +117,14 @@ class ProductsList{
             this.allGoods.push(goodItem);
             innerDiv.insertAdjacentHTML('beforeend', goodItem.renderProductItem());
             innerDiv.insertAdjacentHTML('afterend', goodItem.createItemModalOrder()); 
+
+            var fastBuy = document.getElementsByClassName('buy');
+            for (let i = 0; i < fastBuy.length; i++){
+                fastBuy[i].addEventListener('click', goodItem.showModalOrder);
+            };
         }
     }
+
     calcListCost(){
         let sum = this.goods.reduce((accum, item) => accum += item.price * item.quant, 0);
         console.log(`Стоимость товаров в корзине: ${sum}`);
@@ -276,55 +335,6 @@ function showBig(event){
     }
 }
 
-//модальное окно для заказа на каждую карточку товара
-// function createModalOrder(){
-//     for (i = 0; i < allGoods.length; i++){
-        // var modalOrder = document.createElement('div');
-        // modalOrder.className = 'modalOrder';
-        // modalOrder.id = 'modalOrder_' + i;
-        // body.insertAdjacentElement('beforeend', modalOrder);
-        // var modalOrderContent = document.createElement('div');
-        // modalOrderContent.className = 'modalOrder_content';
-        // modalOrderContent.id = 'modalOrderContent' + i;
-        // modalOrder.appendChild(modalOrderContent);
-        // var closeModalOrder = document.createElement('span');
-        // closeModalOrder.className = 'close_modal_order';
-        // closeModalOrder.id = 'closeModalOrder_' + i;
-        // closeModalOrder.innerText = 'X';
-        // modalOrderContent.appendChild(closeModalOrder);
-        // var title = document.createElement('h3');
-        // title.innerText = allGoods[i].title;
-        // title.className = 'orderTitle';
-        // modalOrderContent.appendChild(title);
-        // var stock = document.createElement('p');
-        // stock.innerText = 'Остаток на складе: ' + allGoods[i].stock + ' шт.';
-        // modalOrderContent.appendChild(stock);  
-        // var p = document.createElement('p');
-        // p.innerText = 'Укажите количество к заказу:';
-        // modalOrderContent.appendChild(p);
-        // var input = document.createElement('input');
-        // input.type = 'number';
-        // input.min = 1;
-        // input.max = allGoods[i].stock;
-        // input.id = 'quantOrder_' + i;
-        // input.className = 'quantOrder';
-        // input.value = 1;
-        // modalOrderContent.appendChild(input);
-        // var block = document.createElement('div');
-        // block.className = 'yesNo';
-        // var ok = document.createElement('p');
-        // ok.className = 'ok';
-        // ok.id = 'ok_' + i;
-        // ok.innerText = 'OK'
-        // var cancel = document.createElement('p');
-        // cancel.className = 'cancel';
-        // cancel.id = 'cancel_' + i;
-        // cancel.innerText = 'ОТМЕНА'
-        // block.appendChild(ok);
-        // block.appendChild(cancel);
-        // modalOrderContent.appendChild(block);
-//     }  
-// }
 //открытие_закрытие модального окна для заказа товара
 function showModalOrder(event){
     var button = event.target;

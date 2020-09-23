@@ -11,15 +11,7 @@ goodsList.calcListCost();// не работает
 // window.onload = createModalCard();
 // window.onload = createModalOrder();
 
-// скрипт ниже не работает
-
-var fastBuy = document.getElementsByClassName('buy');
-console.log(fastBuy)//массив объектов ЕСТЬ
-console.log(fastBuy[0])//undefined Почему?
-for (let i = 0; i < fastBuy.length; i++){
-    console.log(fastBuy[i])
-    fastBuy[i].addEventListener('click', showModalOrder);
-};
+// скрипт ниже не работает (все нужно прописать методами объекта ProductItem!!!)
 
 var cardsImg = document.getElementsByClassName('over1');
 for (var i = 0; i < cardsImg.length; i++){
