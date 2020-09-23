@@ -1,21 +1,29 @@
 let goodsList = new ProductsList();
 console.log(goodsList)// выводит все поля объекта (массив goods заполнен)
 console.log(goodsList.goods)// а здесь возвращает пустой массив. Почему?
+console.log(goodsList.allGoods)//это работает
+// console.log(goodsList.allGoods[0].title)//это не работает
 
 goodsList.renderList();
 goodsList.calcListCost();// не работает
 
-// скрипт ниже не работает (все функции завязаны на массив goods)
-window.onload = createModalCard();
-window.onload = createModalOrder();
+
+// window.onload = createModalCard();
+// window.onload = createModalOrder();
+
+// скрипт ниже не работает
+
+var fastBuy = document.getElementsByClassName('buy');
+console.log(fastBuy)//массив объектов ЕСТЬ
+console.log(fastBuy[0])//undefined Почему?
+for (let i = 0; i < fastBuy.length; i++){
+    console.log(fastBuy[i])
+    fastBuy[i].addEventListener('click', showModalOrder);
+};
 
 var cardsImg = document.getElementsByClassName('over1');
 for (var i = 0; i < cardsImg.length; i++){
     cardsImg[i].addEventListener('click', showModalGood);
-};
-var fastBuy = document.getElementsByClassName('buy');
-for (var i = 0; i < fastBuy.length; i++){
-    fastBuy[i].addEventListener('click', showModalOrder);
 };
 
 var buy = document.getElementsByClassName('buygame');

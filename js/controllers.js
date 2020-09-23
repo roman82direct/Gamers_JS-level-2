@@ -5,16 +5,36 @@ class ProductItem{
        this.price = good.price;
        this.id = good.id;
        this.imgSrc = good.photoForGallery[0];
-       this.ctock = good.quant;
+       this.stock = good.quant;
     }
     renderProductItem(){
-        return `<div id=card_${this.id-1} class="product-item">
+        return `<div id=card_${this.id} class="product-item">
         <img class='card-img' src = '${this.imgSrc}'>
         <h3>${this.title}</h3>
         <p>Цена: ${this.price} руб.</p>
-        <a id='buy_${this.id-1}' class="buy">Купить</a>
-        <div id='over_${this.id-1}' class='over1'></div>
+        <a id='buy_${this.id}' class="buy">Купить</a>
+        <div id='over_${this.id}' class='over1'></div>
     </div>`
+    }
+    //Модальное окно для заказа на каждую карточку
+    createItemModalOrder(){
+        return `<div id="modalOrder_${this.id}" class="modalOrder">
+        <div id="modalOrderContent${this.id}" class="modalOrder_content">
+            <span id="closeModalOrder_${this.id}" class="close_modal_order">X</span>
+            <h3 class="orderTitle">${this.title}</h3>
+            <p>Остаток на складе: ${this.stock} шт.</p>
+            <p>Укажите количество к заказу</p>
+            <input type="number" id="quantOrder_${this.id}" class="quantOrder" min="1" max="${this.stock}">
+            <div class="yesNo">
+                <span id="ok_${this.id}" class="ok">OK</span>
+                <span id="cancel_${this.id}" class="cancel">ОТМЕНА</span>
+            </div>
+        </div>
+    </div>`
+
+    }
+    createItemModalDescription(){
+        
     }
 }
 
@@ -42,15 +62,17 @@ class ProductsList{
         for (let item of this.goods){
             let goodItem = new ProductItem(item);
             this.allGoods.push(goodItem);
-            innerDiv.insertAdjacentHTML('beforeend', goodItem.renderProductItem()); 
+            innerDiv.insertAdjacentHTML('beforeend', goodItem.renderProductItem());
+            innerDiv.insertAdjacentHTML('afterend', goodItem.createItemModalOrder()); 
         }
     }
     calcListCost(){
-        let sum = this.allGoods.reduce((accum, item) => accum += item.price * item.stock, 0);
+        let sum = this.goods.reduce((accum, item) => accum += item.price * item.quant, 0);
         console.log(`Стоимость товаров в корзине: ${sum}`);
         // let total = 0;
-        // goods.forEach(function(item){
-        //     total += item.price * item.quant;
+        // this.allGoods.forEach(function(item){
+        //     total += item.price * item.stock;
+        //     console.log(item.stock)
         // })
         // console.log(`Стоимость товаров в каталоге - ${total}`);    
     }
@@ -255,54 +277,54 @@ function showBig(event){
 }
 
 //модальное окно для заказа на каждую карточку товара
-function createModalOrder(){
-    for (i = 0; i < goods.length; i++){
-        var modalOrder = document.createElement('div');
-        modalOrder.className = 'modalOrder';
-        modalOrder.id = 'modalOrder_' + i;
-        body.insertAdjacentElement('beforeend', modalOrder);
-        var modalOrderContent = document.createElement('div');
-        modalOrderContent.className = 'modalOrder_content';
-        modalOrderContent.id = 'modalOrderContent' + i;
-        modalOrder.appendChild(modalOrderContent);
-        var closeModalOrder = document.createElement('span');
-        closeModalOrder.className = 'close_modal_order';
-        closeModalOrder.id = 'closeModalOrder_' + i;
-        closeModalOrder.innerText = 'X';
-        modalOrderContent.appendChild(closeModalOrder);
-        var title = document.createElement('h3');
-        title.innerText = goods[i].title;
-        title.className = 'orderTitle';
-        modalOrderContent.appendChild(title);
-        var stock = document.createElement('p');
-        stock.innerText = 'Остаток на складе: ' + goods[i].quant + ' шт.';
-        modalOrderContent.appendChild(stock);  
-        var p = document.createElement('p');
-        p.innerText = 'Укажите количество к заказу:';
-        modalOrderContent.appendChild(p);
-        var input = document.createElement('input');
-        input.type = 'number';
-        input.min = 1;
-        input.max = goods[i].quant;
-        input.id = 'quantOrder_' + i;
-        input.className = 'quantOrder';
-        input.value = 1;
-        modalOrderContent.appendChild(input);
-        var block = document.createElement('div');
-        block.className = 'yesNo';
-        var ok = document.createElement('p');
-        ok.className = 'ok';
-        ok.id = 'ok_' + i;
-        ok.innerText = 'OK'
-        var cancel = document.createElement('p');
-        cancel.className = 'cancel';
-        cancel.id = 'cancel_' + i;
-        cancel.innerText = 'ОТМЕНА'
-        block.appendChild(ok);
-        block.appendChild(cancel);
-        modalOrderContent.appendChild(block);
-    }  
-}
+// function createModalOrder(){
+//     for (i = 0; i < allGoods.length; i++){
+        // var modalOrder = document.createElement('div');
+        // modalOrder.className = 'modalOrder';
+        // modalOrder.id = 'modalOrder_' + i;
+        // body.insertAdjacentElement('beforeend', modalOrder);
+        // var modalOrderContent = document.createElement('div');
+        // modalOrderContent.className = 'modalOrder_content';
+        // modalOrderContent.id = 'modalOrderContent' + i;
+        // modalOrder.appendChild(modalOrderContent);
+        // var closeModalOrder = document.createElement('span');
+        // closeModalOrder.className = 'close_modal_order';
+        // closeModalOrder.id = 'closeModalOrder_' + i;
+        // closeModalOrder.innerText = 'X';
+        // modalOrderContent.appendChild(closeModalOrder);
+        // var title = document.createElement('h3');
+        // title.innerText = allGoods[i].title;
+        // title.className = 'orderTitle';
+        // modalOrderContent.appendChild(title);
+        // var stock = document.createElement('p');
+        // stock.innerText = 'Остаток на складе: ' + allGoods[i].stock + ' шт.';
+        // modalOrderContent.appendChild(stock);  
+        // var p = document.createElement('p');
+        // p.innerText = 'Укажите количество к заказу:';
+        // modalOrderContent.appendChild(p);
+        // var input = document.createElement('input');
+        // input.type = 'number';
+        // input.min = 1;
+        // input.max = allGoods[i].stock;
+        // input.id = 'quantOrder_' + i;
+        // input.className = 'quantOrder';
+        // input.value = 1;
+        // modalOrderContent.appendChild(input);
+        // var block = document.createElement('div');
+        // block.className = 'yesNo';
+        // var ok = document.createElement('p');
+        // ok.className = 'ok';
+        // ok.id = 'ok_' + i;
+        // ok.innerText = 'OK'
+        // var cancel = document.createElement('p');
+        // cancel.className = 'cancel';
+        // cancel.id = 'cancel_' + i;
+        // cancel.innerText = 'ОТМЕНА'
+        // block.appendChild(ok);
+        // block.appendChild(cancel);
+        // modalOrderContent.appendChild(block);
+//     }  
+// }
 //открытие_закрытие модального окна для заказа товара
 function showModalOrder(event){
     var button = event.target;
@@ -320,14 +342,14 @@ function showModalOrder(event){
         quant.value = '1';
     };
     ok.onclick = function(){
-        let orderGood = {        //объект - товар в корзине
-            title: goods[num].title,
-            price: goods[num].price,
-            quantOrder: parseInt(quant.value),
-            gameId: goods[num].id,
-            photo: goods[num].photoForGallery[0]
-        }
-        order.push(orderGood);   //кладем товар в корзину
+        // let orderGood = {        //объект - товар в корзине
+        //     title: goods[num].title,
+        //     price: goods[num].price,
+        //     quantOrder: parseInt(quant.value),
+        //     gameId: goods[num].id,
+        //     photo: goods[num].photoForGallery[0]
+        // }
+        // order.push(orderGood);   //кладем товар в корзину
         modalOrder.style.display = 'none';
         modalGood.style.display = "none";
         quant.value = '1';
