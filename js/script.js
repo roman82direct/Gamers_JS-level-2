@@ -7,9 +7,9 @@ console.log(goodsList.allGoods)//это работает
 goodsList.renderList();
 goodsList.calcListCost();// не работает
 
+let goodsInBasket = new BasketList();
+goodsInBasket.renderBasketList();
 
-// window.onload = createModalCard();
-// window.onload = createModalOrder();
 
 // скрипт ниже не работает (все нужно прописать методами объекта ProductItem!!!)
 
@@ -27,14 +27,6 @@ var small = document.getElementsByClassName('small_Img');
 for (var i = 0; i < small.length; i++){
     small[i].onclick = showBig;
 };
-
-let basket = document.getElementById('basket');
-basket.onclick = () => {
-    showBasket();
-    let basketItemList = new BasketList;
-    basketItemList.renderBasketList();
-    console.log(basketItemList.calcTotalCost());
-}
 
 var prev = document.getElementsByClassName('prev');
 for (var i = 0; i < prev.length; i++){
