@@ -11,7 +11,7 @@ let goodsInBasket = new BasketList();
 goodsInBasket.renderBasketList();
 
 
-// скрипт ниже не работает (все нужно прописать методами объекта ProductItem!!!)
+// скрипт ниже не работает (прописать методами объекта ProductItem!!!)
 
 var cardsImg = document.getElementsByClassName('over1');
 for (var i = 0; i < cardsImg.length; i++){

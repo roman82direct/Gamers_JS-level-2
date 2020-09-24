@@ -190,3 +190,10 @@ box-shadow: 1px 1px 1px black;
     padding: 5px 5px 0px;
     margin-left: 10px;
   }
+  .changeBasket:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 3px black;
+    }
+  .changeBasket:active {
+    box-shadow: none;
+    }

@@ -23,7 +23,7 @@ main {
   max-width: 1920px;
   margin: 13px auto;
   min-height: 83px;
-  background-image: url(../img/contactsbkgr.svg);
+  background-color: rgb(75, 75, 75);
 }
 .logobar {
   max-width: 1020px;
@@ -196,7 +196,7 @@ input[type="text"]:focus {
 .product-item {
   width: 271px;
   height: 500px;
-  background-color: #dddddd;
+  background-color: #c4c4c4;
   margin: 0px 15px 0px;
   position: relative;
 }

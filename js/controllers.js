@@ -16,6 +16,7 @@ class ProductItem{
         <div id='over_${this.id}' class='over1'></div>
     </div>`
     }
+
     //Модальное окно для заказа на каждую карточку
     createItemModalOrder(){
         return `<div id="modalOrder_${this.id}" class="modalOrder">
@@ -57,14 +58,14 @@ class ProductItem{
                 } 
             })
             if (!check){
-                let orderGood = {        //объект - товар в корзине
+                let orderGood = { //новый объект - товар в корзине
                 "id": parseInt(this.id.split('_')[1]),
                 "title": goodsList.goods[this.id.split('_')[1] - 1].title,
                 "price": goodsList.goods[this.id.split('_')[1] - 1].price,
                 "quant": parseInt(quant.value),
                 "photo": goodsList.goods[this.id.split('_')[1] - 1].photoForGallery[0]
                 }
-                goodsInBasket.goods.push(orderGood);   //кладем товар в корзину
+                goodsInBasket.goods.push(orderGood);
                 basket.innerHTML += ' *';
             }
             modalOrder.style.display = 'none';
@@ -171,18 +172,6 @@ class ItemInBasket{
     totalItemCost(){ //суммарная стоимость заказанной позиции
         return this.price * this.quantity;
     }
-
-    addItem(){   // добавить позицию в корзину
-
-    }
-
-    deleteItem(){   // удалить позицию из корзины
-
-    }
-
-    changeItem(){   // изменить количество заказанной позиции
-        
-    }
 }
 
 // Класс списка товаров в корзине
@@ -257,6 +246,7 @@ class BasketList{
             modalBasket.style.display = 'none';
             header.innerText = '';
         };
+        clear.onclick = this.deleteAll;
 
         window.onclick = function(event) {
             if (event.target == modalBasket) {
@@ -279,11 +269,15 @@ class BasketList{
         return totalBasket;
     }
 
-    makeOrder(){    // оформить заказ
+    deleteItem(){   // удалить позицию из корзины
 
     }
 
-    clearBasket(){    // удалить всё из корзины
+    deleteAll(){   // очистить корзину
+        
+    }
+
+    makeOrder(){    // оформить заказ
 
     }
 }
@@ -415,61 +409,6 @@ function showBig(event){
         cont.style.height = '320px';
     }
 }
-
-//открытие_закрытие модального окна для заказа товара
-function showModalOrder(event){
-    var button = event.target;
-    var num = button.id.split("_")[1];
-    var modalOrder = document.getElementById('modalOrder_' + num);
-    var closeOrder = document.getElementById('closeModalOrder_' + num);
-    var cancel = document.getElementById('cancel_' + num);
-    var ok = document.getElementById('ok_' + num);
-    var quant = document.getElementById('quantOrder_' + num);
-    var modalGood = document.getElementById('modalGood_' + num);
-    var basket = document.getElementById('basket');
-    modalOrder.style.display = 'block';
-    closeOrder.onclick = function(){
-        modalOrder.style.display = 'none';
-        quant.value = '1';
-    };
-    ok.onclick = function(){
-        // let orderGood = {        //объект - товар в корзине
-        //     title: goods[num].title,
-        //     price: goods[num].price,
-        //     quantOrder: parseInt(quant.value),
-        //     gameId: goods[num].id,
-        //     photo: goods[num].photoForGallery[0]
-        // }
-        // order.push(orderGood);   //кладем товар в корзину
-        modalOrder.style.display = 'none';
-        modalGood.style.display = "none";
-        quant.value = '1';
-        basket.innerHTML += ' *';
-        basket.style.color = 'red';
-        window.onkeydown = null;
-    }
-    cancel.onclick = function(){
-        modalOrder.style.display = 'none';
-        quant.value = '1';
-    }
-    window.onclick = function(event) {
-        if (event.target == modalOrder || event.target == modalGood) {
-            modalOrder.style.display = "none";
-            modalGood.style.display = "none";
-            quant.value = '1';
-        }
-    }
-    window.onkeydown = (event) => {
-        // console.log(event);
-        if (event.code == 'Enter'|| event.code == 'NumpadEnter'){
-            ok.onclick();
-            window.onkeydown = null;
-        } else if
-         (event.code == 'Escape'){
-            cancel.onclick();
-        }
-    } 
-};
 
 //показ больших фото в галерее при клике на стрелку
 function showBigPrevArrow(){
