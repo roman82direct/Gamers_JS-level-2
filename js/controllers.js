@@ -57,15 +57,17 @@ class ProductItem{
                     check = el.id;
                 } 
             })
-            if (!check){
-                let orderGood = { //новый объект - товар в корзине
-                "id": parseInt(this.id.split('_')[1]),
-                "title": goodsList.goods[this.id.split('_')[1] - 1].title,
-                "price": goodsList.goods[this.id.split('_')[1] - 1].price,
-                "quant": parseInt(quant.value),
-                "photo": goodsList.goods[this.id.split('_')[1] - 1].photoForGallery[0]
+            let index;
+            goodsList.goods.forEach( (el, i) => {
+                if (el.id == this.id.split('_')[1]){
+                    index = i;
                 }
-                goodsInBasket.goods.push(orderGood);
+
+            })
+            if (!check){
+                let newItemInBasket = new ItemInBasket(goodsList.goods[index]);
+                newItemInBasket.quant = parseInt(quant.value);
+                goodsInBasket.goods.push(newItemInBasket);
                 basket.innerHTML += ' *';
             }
             modalOrder.style.display = 'none';
@@ -129,15 +131,15 @@ class ProductsList{
             innerDiv.insertAdjacentHTML('afterend', goodItem.createItemModalOrder()); 
 
             var fastBuy = document.getElementsByClassName('buy');
-            for (let i = 0; i < fastBuy.length; i++){
-                fastBuy[i].addEventListener('click', goodItem.showModalOrder);
-            };
+            for (let item of fastBuy){
+                item.addEventListener('click', goodItem.showModalOrder);
+            }
         }
     }
 
     calcListCost(){
-        let sum = this.goods.reduce((accum, item) => accum += item.price * item.quant, 0);
-        console.log(`Стоимость товаров в корзине: ${sum}`);
+        let sum = this.allGoods.reduce((accum, item) => accum += item.price * item.stock, 0);
+        console.log(`Стоимость товаров в каталоге: ${sum}`);
         // let total = 0;
         // this.allGoods.forEach(function(item){
         //     total += item.price * item.stock;
@@ -159,7 +161,7 @@ class ItemInBasket{
     renderBasketItem(){
         return `<div id=card_${this.id} class="basketItem">
         <img style="height: 80px" src = '${this.imgSrc}'>
-        <p class="basketItemTitle">${this.title}. </p>
+        <p class="basketItemTitle"> ${this.title} </p>
         <p class="basketItemArt">Арт.: ${this.id} </p>
         <p class="basketItemPrice">Цена: ${this.price} руб.</p>
         <p class="basketItemQuant">Количество: ${this.quantity} шт.</p>
@@ -274,7 +276,7 @@ class BasketList{
     }
 
     deleteAll(){   // очистить корзину
-        
+
     }
 
     makeOrder(){    // оформить заказ

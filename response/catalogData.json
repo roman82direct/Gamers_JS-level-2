@@ -42,5 +42,16 @@
     "photoForGallery": ["img/tomb/forgallery/tomb_0.jpg", "img/tomb/forgallery/tomb_1.jpg", "img/tomb/forgallery/tomb_2.jpg", "img/tomb/forgallery/tomb_3.jpg", "img/tomb/forgallery/tomb_4.jpg"],
     "bigPhoto": ["img/tomb/big/tomb_0.jpg", "img/tomb/big/tomb_1.jpg", "img/tomb/big/tomb_2.jpg", "img/tomb/big/tomb_3.jpg"],
     "smallPhoto": ["img/tomb/small/tomb_0.jpg", "img/tomb/small/tomb_1.jpg", "img/tomb/small/tomb_2.jpg", "img/tomb/small/tomb_3.jpg"]
-    }
+    },
+    {
+        "id": 8,
+        "title": "tomb rider next edition",
+        "shortDiscr": "The plot is set in a fictional history of real world events and follows the centuries-old",
+        "longDiscr": "The plot is set in a fictional history of real world events and follows the centuries-old struggle between the Assassins, who fight for peace with free will, and the Templars, who desire peace through control. The story is set in the mid-18th century during the Seven Years War, and follows Shay Patrick Cormac, an Assassin-turned-Templar who hunts down former members of his Brotherhood after being betrayed by them. Gameplay in Rogue is very similar to that of Black Flag with a mixture of ship-based naval exploration and third-person land-based exploration with some new features.",
+        "price": 110,
+        "quant": 10,
+        "photoForGallery": ["img/tomb/forgallery/tomb_2.jpg", "img/tomb/forgallery/tomb_3.jpg", "img/tomb/forgallery/tomb_4.jpg"],
+        "bigPhoto": ["img/tomb/big/tomb_0.jpg", "img/tomb/big/tomb_1.jpg", "img/tomb/big/tomb_2.jpg", "img/tomb/big/tomb_3.jpg"],
+        "smallPhoto": ["img/tomb/small/tomb_0.jpg", "img/tomb/small/tomb_1.jpg", "img/tomb/small/tomb_2.jpg", "img/tomb/small/tomb_3.jpg"]
+        }
 ]
