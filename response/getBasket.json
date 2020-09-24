@@ -4,13 +4,13 @@
     "title": "assassin’s creed: rogue",
     "price": 100,
     "quant": 1,
-    "photo": "img/assassins/forgallery/ACreed_0.jpg"
+    "imgSrc": "img/assassins/forgallery/ACreed_0.jpg"
     },
     {
     "id": 2,
     "title": "world of tanks",
     "price": 90,
     "quant": 1,
-    "photo": "img/woftanks/forgallery/tanks_1.jpg"
+    "imgSrc": "img/woftanks/forgallery/tanks_1.jpg"
     }
 ]

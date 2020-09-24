@@ -57,17 +57,22 @@ class ProductItem{
                     check = el.id;
                 } 
             })
-            let index;
+            let index, src;
             goodsList.goods.forEach( (el, i) => {
                 if (el.id == this.id.split('_')[1]){
                     index = i;
+                    src = el.photoForGallery[0];
                 }
 
             })
             if (!check){
                 let newItemInBasket = new ItemInBasket(goodsList.goods[index]);
                 newItemInBasket.quant = parseInt(quant.value);
+                newItemInBasket.imgSrc = src;
+                console.log(newItemInBasket);
+
                 goodsInBasket.goods.push(newItemInBasket);
+                console.log(goodsInBasket);
                 basket.innerHTML += ' *';
             }
             modalOrder.style.display = 'none';
@@ -152,7 +157,7 @@ class ProductsList{
 // Класс карточки товара в корзине
 class ItemInBasket{
     constructor(orderGood){
-        this.imgSrc = orderGood.photo;
+        this.imgSrc = orderGood.imgSrc;
         this.id = orderGood.id;
         this.title = orderGood.title;
         this.price = orderGood.price;
