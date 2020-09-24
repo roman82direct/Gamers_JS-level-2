@@ -170,7 +170,8 @@ class ItemInBasket{
         <p class="basketItemTitle"> ${this.title} </p>
         <p class="basketItemArt">Арт.: ${this.id} </p>
         <p class="basketItemPrice">Цена: ${this.price} руб.</p>
-        <p class="basketItemQuant">Количество: ${this.quantity} шт.</p>
+        <p class="basketItemQuant">Количество:</p>
+        <input type="number" value="${this.quantity}" class="basketNum">
         <h3 class="basketItemTotal">ИТОГО: ${this.totalItemCost()} руб.</h3>
         <a id='change_${this.id}' class="changeBasket">Изменить</a>
         <a id='del_${this.id}' class="changeBasket">Удалить</a>
@@ -277,6 +278,33 @@ class BasketList{
         return totalBasket;
     }
 
+    addItem(){
+        // let check;
+        // goodsInBasket.goods.forEach(el => {
+        //     if (el.id == this.id.split('_')[1]){
+        //         el.quant += parseInt(quant.value);
+        //         check = el.id;
+        //     } 
+        // })
+        // let index, src;
+        // goodsList.allGoods.forEach( (el, i) => {
+        //     if (el.id == this.id.split('_')[1]){
+        //         index = i;
+        //         src = el.imgSrc;
+        //     }
+
+        // })
+        // if (!check){
+        //     let newItemInBasket = new ItemInBasket(goodsList.allGoods[index]);
+        //     newItemInBasket.quant = parseInt(quant.value);
+        //     newItemInBasket.imgSrc = src;
+        //     console.log(newItemInBasket);
+
+        //     goodsInBasket.goods.push(newItemInBasket);
+        //     console.log(goodsInBasket);
+        //     basket.innerHTML += ' *';
+        // }
+    }
     deleteItem(){   // удалить позицию из корзины
 
     }
