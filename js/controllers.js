@@ -58,15 +58,15 @@ class ProductItem{
                 } 
             })
             let index, src;
-            goodsList.goods.forEach( (el, i) => {
+            goodsList.allGoods.forEach( (el, i) => {
                 if (el.id == this.id.split('_')[1]){
                     index = i;
-                    src = el.photoForGallery[0];
+                    src = el.imgSrc;
                 }
 
             })
             if (!check){
-                let newItemInBasket = new ItemInBasket(goodsList.goods[index]);
+                let newItemInBasket = new ItemInBasket(goodsList.allGoods[index]);
                 newItemInBasket.quant = parseInt(quant.value);
                 newItemInBasket.imgSrc = src;
                 console.log(newItemInBasket);
@@ -126,6 +126,7 @@ class ProductsList{
             .catch(error => {
                 console.log(error);
             })
+            this.goods = [1,2,3]
     }
     renderList(){
         let innerDiv = document.querySelector(this.container);
