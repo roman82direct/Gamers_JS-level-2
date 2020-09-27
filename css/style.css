@@ -720,8 +720,8 @@ footer {
   color: red;
 }
 .invalid{
-  border: 2px solid red;
+  border: 1px solid red!important;
 }
 .valid{
-  border: 2px solid green;
+  border: 1px solid green!important;
 }
