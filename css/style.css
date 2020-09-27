@@ -428,7 +428,7 @@ fieldset .contformtxt {
   font-size: 14px;
   font-weight: 400;
   padding-left: 16px;
-  margin-bottom: 21px;
+  margin-bottom: 15px;
 }
 .message {
   width: 473px;
@@ -714,4 +714,14 @@ footer {
   .searchbar {
     display: none;
   }
+}
+/* стили ошибок валидации */
+.error-msg{
+  color: red;
+}
+.invalid{
+  border: 2px solid red;
+}
+.valid{
+  border: 2px solid green;
 }

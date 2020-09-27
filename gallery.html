@@ -89,13 +89,19 @@
                     </div>
 
                 </div>
-                <form action="#">
+                <form action="#" id="myform">
                     <fieldset style="border: none">
-                        <input type="text" id="name" class="contformtxt" placeholder="Имя">
-                        <input type="text" id="tel" class="contformtxt" placeholder="Тел: +7(000)000-0000">
-                        <input type="text" id="mail" class="contformtxt" placeholder="Email">
+                        <label>
+                            <input type="text" id="name" name="name" class="contformtxt" placeholder="Имя">
+                        </label>
+                        <label>
+                            <input type="text" id="tel" name="tel" class="contformtxt" placeholder="Тел: +7(000)000-0000">
+                        </label>
+                        <label>
+                            <input type="text" id="mail" name="mail" class="contformtxt" placeholder="Email">
+                        </label>   
                         <textarea class="message" name="message" placeholder="Сообщение"></textarea>
-                        <input type="submit" class="contbutt" value="ОТПРАВИТЬ">
+                        <input type="submit" id="button" class="contbutt" value="ОТПРАВИТЬ">
                     </fieldset>
                 </form>
             </div>
