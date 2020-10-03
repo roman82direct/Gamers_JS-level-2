@@ -1,14 +1,17 @@
-let goodsList = new ProductsList();
-// console.log(goodsList)// выводит все поля объекта (массив goods заполнен)
-// console.log(goodsList.goods)// а здесь возвращает пустой массив. Почему?
-console.log(goodsList.allGoods)//это работает
-// console.log(goodsList.allGoods[0].title)//это не работает
 
-goodsList.renderList();
-goodsList.calcListCost();// не работает
 
-let goodsInBasket = new BasketList();
-goodsInBasket.renderBasketList();
+//----------------------------------
+// let goodsList = new ProductsList();
+// // console.log(goodsList)// выводит все поля объекта (массив goods заполнен)
+// // console.log(goodsList.goods)// а здесь возвращает пустой массив. Почему?
+// console.log(goodsList.allGoods)//это работает
+// // console.log(goodsList.allGoods[0].title)//это не работает
+
+// goodsList.renderList();
+// goodsList.calcListCost();// не работает
+
+// let goodsInBasket = new BasketList();
+// goodsInBasket.renderBasketList();
 
 // валидация полей формы
 window.onload = () => {
