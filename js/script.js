@@ -1,4 +1,14 @@
 
+const list2 = {
+    ProductsList: ProductItem,
+    Basket: BasketItem
+};
+let basketList = new Basket();
+let products = new ProductsList();
+products.getJson(`../response/catalogData.json`).then(data => products.handleData(data));
+basketList.getJson(`../response/getBasket.json`).then(data => basketList.handleData(data.contents));
+console.log (basketList.allProducts)
+console.log (products.allProducts)
 
 //----------------------------------
 // let goodsList = new ProductsList();

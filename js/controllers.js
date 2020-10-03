@@ -29,6 +29,11 @@ class List {//базовый класс списков (список товар�
             // console.log(productObj);
             this.allProducts.push(productObj);
             block.insertAdjacentHTML('beforeend', productObj.render());
+
+            let fastBuy = document.getElementsByClassName('buy');
+            for (let item of fastBuy){
+                item.addEventListener('click', productObj.showModalOrder);
+            }
         }
     }
     filter(value){
@@ -53,8 +58,7 @@ class Item{//базовый класс елементов (елемент в г�
         this.product_name = el.title;
         this.price = el.price;
         this.id_product = el.id;
-        this.stock = el.stock;
-        this.img = el.photoForGallery[0];
+        this.img = el.photoForGallery;
     }
     render(){
         return `<div id=card_${this.id_product} class="product-item">
@@ -62,10 +66,24 @@ class Item{//базовый класс елементов (елемент в г�
                     <h3>${this.product_name}</h3>
                     <p>Цена: ${this.price} руб.</p>
                     <a class="buy"
-                    data-id="${this.id_product}"
+                    id="buy_${this.id_product}"
                     data-name="${this.product_name}"
                     data-price="${this.price}">Купить</a>
                     <div id='over_${this.id_product}' class='over1'></div>
+                </div>
+
+                <div id="modalOrder_${this.id_product}" class="modalOrder">
+                    <div id="modalOrderContent${this.id_product}" class="modalOrder_content">
+                        <span id="closeModalOrder_${this.id_product}" class="close_modal_order">X</span>
+                        <h3 class="orderTitle">${this.product_name}</h3>
+                        <p>Остаток на складе: ${this.stock} шт.</p>
+                        <p>Укажите количество к заказу</p>
+                        <input type="number" id="quantOrder_${this.id_product}" value="1" class="quantOrder" min="1" max="${this.stock}">
+                        <div class="yesNo">
+                            <span id="ok_${this.id_product}" class="ok">OK</span>
+                            <span id="cancel_${this.id_product}" class="cancel">ОТМЕНА</span>
+                        </div>
+                    </div>
                 </div>`
     }
 }
@@ -78,22 +96,121 @@ class ProductsList extends List{//класс списка товаров в га
             .then(data => this.handleData(data));
     }
     _init(){
-        document.querySelector(this.container).addEventListener('click', e => {
-            if(e.target.classList.contains('buy')){
-                this.cart.addProduct(e.target);
+        let fastBuy = document.getElementsByClassName('buy');
+        // console.log(fastBuy)
+            for (let item of fastBuy){
+                console.log(item)
+                // item.addEventListener('click', function(){
+                //     console.log('hi')
+                // });
             }
-        });
-        document.querySelector('.searchbar').addEventListener('submit', e => {
-            e.preventDefault();
-            this.filter(document.querySelector('.search-field').value)
-        })
+        // document.querySelector(this.container).addEventListener('click', e => {
+        //     if(e.target.classList.contains('buy')){
+        //         this.cart.addProduct(e.target);
+        //     }
+        // });
+
+        // document.querySelector('.searchbar').addEventListener('submit', e => {
+        //     e.preventDefault();
+        //     this.filter(document.querySelector('.search-field').value)
+        // })
     }
+ 
 }
 
-class ProductItem extends Item{}
+class ProductItem extends Item{// товар в каталоге
+    constructor(el){
+        super(el);
+        this.stock = el.stock;
+    }
 
-class Cart extends List{//класс списка товаров в корзине (потомок класса List)
-    constructor(container = ".modalBasket_list", url = "../response/getBasket.json"){
+    showModalOrder(event){
+        let button = event.target;
+        let num = button.id.split("_")[1];
+        let modalOrder = document.getElementById('modalOrder_' + num);
+        let closeOrder = document.getElementById('closeModalOrder_' + num);
+        let cancel = document.getElementById('cancel_' + num);
+        let ok = document.getElementById('ok_' + num);
+        let quant = document.getElementById('quantOrder_' + num);
+        // var modalGood = document.getElementById('modalGood_' + num);
+        let basket = document.getElementById('basket');
+        modalOrder.style.display = 'block';
+        closeOrder.onclick = function(){
+            modalOrder.style.display = 'none';
+            quant.value = '1';
+        };
+        ok.onclick = function(){
+            let check;
+            // console.log(basketList.allProducts)
+            basketList.allProducts.forEach(el => {
+                if (el.id_product == this.id.split('_')[1]){
+                    el.quantity += parseInt(quant.value);
+                    check = el.id_product;
+                    console.log(basketList.allProducts)
+                } 
+            })
+            basketList.goods.forEach(el => {
+                if (el.id == this.id.split('_')[1]){
+                    el.quantity += parseInt(quant.value);
+                } 
+            })
+            let index, src;
+            products.allProducts.forEach( (el, i) => {
+                if (el.id_product == this.id.split('_')[1]){
+                    index = i;
+                    src = el.img;
+                    // console.log(src);
+                }
+
+            })
+            if (!check){
+                let newBasketGood = {
+                    id:  products.allProducts[index].id_product,
+                    title: products.allProducts[index].product_name,
+                    price: products.allProducts[index].price,
+                    quantity: parseInt(quant.value),
+                    photoForGallery: src
+                }
+                basketList.goods.push(newBasketGood);
+
+                // console.log(basketList.allProducts);
+                // console.log(basketList.goods);
+                basket.innerHTML += ' *';
+            }
+            document.querySelector('.modalBasket_list').innerHTML = '';
+            basketList.allProducts = [];
+            basketList.render();
+            modalOrder.style.display = 'none';
+            // modalGood.style.display = "none";
+            quant.value = '1';
+            basket.style.color = 'red';
+            window.onkeydown = null;
+        }
+        cancel.onclick = function(){
+            modalOrder.style.display = 'none';
+            quant.value = '1';
+        }
+        window.onclick = function(event) {
+            if (event.target == modalOrder ){//|| event.target == modalGood
+                modalOrder.style.display = "none";
+                // modalGood.style.display = "none";
+                quant.value = '1';
+            }
+        }
+        window.onkeydown = (event) => {
+            if (event.code == 'Enter'|| event.code == 'NumpadEnter'){
+                ok.onclick();
+                window.onkeydown = null;
+            } else if
+             (event.code == 'Escape'){
+                cancel.onclick();
+            }
+        } 
+    };
+}
+
+class Basket extends List{//класс списка товаров в корзине (потомок класса List)
+    constructor(container = '.modalBasket_list', url = "../response/getBasket.json"){
         super(url, container);
         this.getJson()
             .then(data => {
@@ -148,20 +265,62 @@ class Cart extends List{//класс списка товаров в корзин
     //     block.querySelector('.product-quantity').textContent = `Quantity: ${product.quantity}`;
     //     block.querySelector('.product-price').textContent = `$${product.quantity*product.price}`;
     //  }
-    //  _init(){
-    //      document.querySelector('.btn-cart').addEventListener('click', () => {
-    //          document.querySelector(this.container).classList.toggle('invisible');
-    //      });
-    //      document.querySelector(this.container).addEventListener('click', e => {
-    //         if(e.target.classList.contains('del-btn')){
-    //             this.removeProduct(e.target);
-    //         }
-    //      })
-    //  }
+
+       //управление модальным окном корзины
+    showBasket(){
+        let modalBasket = document.querySelector('.modalBasket');
+        let closeModalBasket = document.querySelector('.close_modal_basket');
+        let header = document.getElementById('basketHeader');
+        // let ok = document.getElementById('ok');
+        let cancel = document.getElementById('cancel');
+        let clear = document.getElementById('clearBasket');
+        if (this.goods.length == 0){
+            header.innerText = 'В корзине нет товаров';
+        } else {
+            var total = 0;
+            for (i = 0; i < this.allProducts.length; i++){
+                total += this.allProducts[i].quantity * this.allProducts[i].price;
+            }
+            header.innerText = `Количество товаров в корзине: ${this.allProducts.length}. На сумму ${total} рублей`;
+        }
+        modalBasket.style.display = 'block';
+
+        closeModalBasket.onclick = function(){
+            modalBasket.style.display = 'none';
+            header.innerText = '';
+        };
+        cancel.onclick = function(){
+            modalBasket.style.display = 'none';
+            header.innerText = '';
+        };
+        clear.onclick = this.deleteAll;
+
+        window.onclick = function(event) {
+            if (event.target == modalBasket) {
+                modalBasket.style.display = "none";
+                header.innerText = '';
+            }
+        }
+        window.onkeydown = (event) => {
+            if (event.code == 'Enter'|| event.code == 'NumpadEnter' || event.code == 'Escape'){
+                cancel.onclick();
+            }
+        } 
+    };
+
+     _init(){
+         document.getElementById('basket').addEventListener('click', () => this.showBasket());
+         
+        //  document.querySelector(this.container).addEventListener('click', e => {
+        //     if(e.target.classList.contains('del-btn')){
+        //         this.removeProduct(e.target);
+        //     }
+        //  })
+    }
 
 }
 
-class CartItem extends Item{// класс элемента в корзине
+class BasketItem extends Item{// класс элемента в корзине
     constructor(el){
         super(el);
         this.quantity = el.quantity;
@@ -181,15 +340,6 @@ class CartItem extends Item{// класс элемента в корзине
     }
 }
 
-const list2 = {
-    ProductsList: ProductItem,
-    Cart: CartItem
-};
-let cart = new Cart();
-let products = new ProductsList(cart);
-products.getJson(`../response/catalogData.json`).then(data => products.handleData(data));
-console.log (cart.allProducts)// пустой
-console.log (products.allProducts)
 //---------------------------------------------------------------------
 
 // Класс карточки товара
@@ -297,9 +447,6 @@ console.log (products.allProducts)
     //     } 
     // };
 
-//     createItemModalDescription(){
-        
-//     }
 // }
 
 // Класс списка товаров в галерее
@@ -348,168 +495,6 @@ console.log (products.allProducts)
 //     }
 // }
 
-// Класс карточки товара в корзине
-// class ItemInBasket{
-//     constructor(orderGood){
-//         this.imgSrc = orderGood.imgSrc;
-//         this.id = orderGood.id;
-//         this.title = orderGood.title;
-//         this.price = orderGood.price;
-//         this.quantity = orderGood.quant;
-//     }
-//     renderBasketItem(){
-//         return `<div id=card_${this.id} class="basketItem">
-//         <img style="height: 80px" src = '${this.imgSrc}'>
-//         <p class="basketItemTitle"> ${this.title} </p>
-//         <p class="basketItemArt">Арт.: ${this.id} </p>
-//         <p class="basketItemPrice">Цена: ${this.price} руб.</p>
-//         <p class="basketItemQuant">Количество:</p>
-//         <input type="number" value="${this.quantity}" class="basketNum">
-//         <h3 class="basketItemTotal">ИТОГО: ${this.totalItemCost()} руб.</h3>
-//         <a id='change_${this.id}' class="changeBasket">Изменить</a>
-//         <a id='del_${this.id}' class="changeBasket">Удалить</a>
-//     </div>`
-//     }
-
-//     totalItemCost(){ //суммарная стоимость заказанной позиции
-//         return this.price * this.quantity;
-//     }
-// }
-
-// Класс списка товаров в корзине
-// class BasketList{
-//     constructor(container = '.modalBasket_list'){
-//         this.container = container;
-//         this.goods = [];
-//         this._getBasketProducts()
-//         .then(data => {
-//             this.goods = [...data];
-//             this.renderBasketList()
-//         })
-//         .catch(error => {
-//             console.log(`Корзина пуста: ${error}`);
-//         })
-//     }
-
-//     _getBasketProducts(){
-//         return fetch('response/getBasket.json')
-//             .then(result => result.json())
-//             .catch(error => {
-//                 console.log(error);
-//             })
-//     }
-
-//     renderBasketList(){
-//         let innerBasket = document.querySelector(this.container);
-//         let basket = document.getElementById('basket');
-//         innerBasket.innerHTML = '';
-//         for (let item of this.goods){
-//             let goodBasketItem = new ItemInBasket(item);
-//             innerBasket.insertAdjacentHTML('beforeend', goodBasketItem.renderBasketItem());
-//             basket.innerHTML += ' *';
-//         }
-//          basket.onclick = () => {
-//             this.showBasket();
-//             console.log(this.calcTotalCost());
-//         }
-//     }
-
-    // управление модальным окном корзины
-    // showBasket(){
-    //     let innerBasket = document.querySelector(this.container);
-    //     innerBasket.innerHTML = '';
-    //     for (let item of this.goods){
-    //         let goodBasketItem = new ItemInBasket(item);
-    //         innerBasket.insertAdjacentHTML('beforeend', goodBasketItem.renderBasketItem());
-    //     }
-
-    //     let modalBasket = document.querySelector('.modalBasket');
-    //     let closeModalBasket = document.querySelector('.close_modal_basket');
-    //     let header = document.getElementById('basketHeader');
-    //     // let ok = document.getElementById('ok');
-    //     let cancel = document.getElementById('cancel');
-    //     let clear = document.getElementById('clearBasket');
-    //     if (this.goods.length == 0){
-    //         header.innerText = 'В корзине нет товаров';
-    //     } else {
-    //         var total = 0;
-    //         for (i = 0; i < this.goods.length; i++){
-    //             total += this.goods[i].quant * this.goods[i].price;
-    //         }
-    //         header.innerText = `Количество товаров в корзине: ${this.goods.length}. На сумму ${total} рублей`;
-    //     }
-    //     modalBasket.style.display = 'block';
-
-    //     closeModalBasket.onclick = function(){
-    //         modalBasket.style.display = 'none';
-    //         header.innerText = '';
-    //     };
-    //     cancel.onclick = function(){
-    //         modalBasket.style.display = 'none';
-    //         header.innerText = '';
-    //     };
-    //     clear.onclick = this.deleteAll;
-
-    //     window.onclick = function(event) {
-    //         if (event.target == modalBasket) {
-    //             modalBasket.style.display = "none";
-    //             header.innerText = '';
-    //         }
-    //     }
-    //     window.onkeydown = (event) => {
-    //         if (event.code == 'Enter'|| event.code == 'NumpadEnter' || event.code == 'Escape'){
-    //             cancel.onclick();
-    //         }
-    //     } 
-    // };
-
-    // calcTotalCost(){
-    //     let totalBasket = 0;
-    //     this.goods.forEach(function(item){
-    //        totalBasket += item.price * item.quant;
-    //     })
-    //     return totalBasket;
-    // }
-
-    // addItem(){
-    //     // let check;
-    //     // goodsInBasket.goods.forEach(el => {
-    //     //     if (el.id == this.id.split('_')[1]){
-    //     //         el.quant += parseInt(quant.value);
-    //     //         check = el.id;
-    //     //     } 
-    //     // })
-    //     // let index, src;
-    //     // goodsList.allGoods.forEach( (el, i) => {
-    //     //     if (el.id == this.id.split('_')[1]){
-    //     //         index = i;
-    //     //         src = el.imgSrc;
-    //     //     }
-
-    //     // })
-    //     // if (!check){
-    //     //     let newItemInBasket = new ItemInBasket(goodsList.allGoods[index]);
-    //     //     newItemInBasket.quant = parseInt(quant.value);
-    //     //     newItemInBasket.imgSrc = src;
-    //     //     console.log(newItemInBasket);
-
-    //     //     goodsInBasket.goods.push(newItemInBasket);
-    //     //     console.log(goodsInBasket);
-    //     //     basket.innerHTML += ' *';
-    //     // }
-    // }
-    // deleteItem(){   // удалить позицию из корзины
-
-    // }
-
-    // deleteAll(){   // очистить корзину
-
-    // }
-
-    // makeOrder(){    // оформить заказ
-
-    // }
-// }
 
 //Класс валидации форм
 class Validator {
