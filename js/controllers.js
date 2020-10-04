@@ -38,13 +38,16 @@ class List {//базовый класс списков (список товар�
     }
     filter(value){
         const regexp = new RegExp(value, 'i');
-        this.filtered = this.allProducts.filter(product => regexp.test(product.title));
+        this.filtered = this.allProducts.filter(product => regexp.test(product.product_name));
         this.allProducts.forEach(el => {
-            const block = document.querySelector(`.product-item[data-id="${el.id}"]`);//???????
+            const block = document.querySelector(`.product-item[id=card_${el.id_product}]`);
+            console.log(block)
             if(!this.filtered.includes(el)){
-                block.classList.add('invisible');
+                block.style.display = 'none';
+                // block.classList.add('invisible');
             } else {
-                block.classList.remove('invisible');
+                // block.classList.remove('invisible');
+                block.style.display = 'block';
             }
         })
     }
@@ -96,24 +99,16 @@ class ProductsList extends List{//класс списка товаров в га
             .then(data => this.handleData(data));
     }
     _init(){
-        let fastBuy = document.getElementsByClassName('buy');
-        // console.log(fastBuy)
-            for (let item of fastBuy){
-                console.log(item)
-                // item.addEventListener('click', function(){
-                //     console.log('hi')
-                // });
-            }
         // document.querySelector(this.container).addEventListener('click', e => {
         //     if(e.target.classList.contains('buy')){
         //         this.cart.addProduct(e.target);
         //     }
         // });
 
-        // document.querySelector('.searchbar').addEventListener('submit', e => {
-        //     e.preventDefault();
-        //     this.filter(document.querySelector('.search-field').value)
-        // })
+        document.querySelector('.searchbar').addEventListener('submit', e => {
+            e.preventDefault();
+            this.filter(document.querySelector('.search-field').value)
+        })
     }
  
 }
