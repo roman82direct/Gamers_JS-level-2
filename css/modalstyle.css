@@ -182,7 +182,8 @@ box-shadow: 1px 1px 1px black;
     width: 200px;
     margin-left: 10px;
 }
-.changeBasket{
+.changeBasket,
+.delBasket{
     text-decoration: none;
     text-align: center;
     width: 60px;
@@ -197,10 +198,12 @@ box-shadow: 1px 1px 1px black;
     padding: 5px 5px 0px;
     margin-left: 10px;
   }
-  .changeBasket:hover {
+  .changeBasket:hover,
+  .delBasket:hover {
     cursor: pointer;
     box-shadow: 1px 1px 3px black;
     }
-  .changeBasket:active {
+  .changeBasket:active,
+  .delBasket:active {
     box-shadow: none;
     }
