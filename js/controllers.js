@@ -210,37 +210,30 @@ class Basket extends List{//класс списка товаров в корзи
             });
     }
 
-    // addProduct(element){
-    //     this.getJson(`response/addToBasket.json`)
-    //         .then(data => {
-    //             if(data.result === 1){
-    //                 let productId = +element.dataset['id'];
-    //                 let find = this.allProducts.find(product => product.id_product === productId);
-    //                 if(find){
-    //                     find.quantity++;
-    //                     this._updateCart(find);
-    //                 } else {
-    //                     let product = {
-    //                         id_product: productId,
-    //                         price: +element.dataset['price'],
-    //                         product_name: element.dataset['name'],
-    //                         quantity: 1
-    //                     };
-    //                     this.goods = [product];
-    //                     this.render();
-    //                 }
-    //             } else {
-    //                 alert('Error');
-    //             }
-    //         })
-    // }
+    changeProduct(element){
+        this.getJson(`response/addToBasket.json`)
+            .then(data => {
+                if(data.result === 1){
+                    let productId = element.id.split("_")[1];
+                    let find = this.allProducts.find(product => product.id_product == productId);
+                    console.log(find)
+                    let newQuant = document.getElementById(`num_${productId}`)
+                        find.quantity = parseInt(newQuant.value);
+                        this._updateCart(find);
+                        // this.goods = [product];
+                        // this.render();
+                } else {
+                    alert('Error');
+                }
+            })
+    }
     removeProduct(element){
         this.getJson(`response/deleteFromBasket.json`)
             .then(data => {
                 if(data.result === 1){
                     let productId = element.id.split("_")[1];
                     // console.log(productId)
-                    // let newQuant = document.getElementById('')
+
                     let find = this.allProducts.find(product => product.id_product === productId);
                         this.allProducts.splice(this.allProducts.indexOf(find), 1);
                         // this.goods.splice(this.goods.indexOf(find), 1);
@@ -265,11 +258,11 @@ class Basket extends List{//класс списка товаров в корзи
         document.getElementById('basket').innerHTML = `Корзина <i class="fas fa-shopping-cart"></i>`;
     }
 
-    // _updateCart(product){
-    //     let block = document.querySelector(`.basketItem[data-id="card_${product.id_product}"]`);
-    //     block.querySelector('.basketNum').textContent = `${product.quantity}`;
-    //     block.querySelector('.basketItemTotal').textContent = `ИТОГО: $${product.quantity*product.price} руб.`;
-    //  }
+    _updateCart(product){
+        let block = document.querySelector(`.basketItem[data-id="card_${product.id_product}"]`);
+        block.querySelector('.basketNum').textContent = `${product.quantity}`;
+        block.querySelector('.basketItemTotal').textContent = `ИТОГО: ${product.quantity*product.price} руб.`;
+     }
 
        //управление модальным окном корзины
     showBasket(){
@@ -281,9 +274,15 @@ class Basket extends List{//класс списка товаров в корзи
 
         //Удаление элемента из списка корзины
         let delButton = document.getElementsByClassName('delBasket');
-        for (let item of delButton){
-            item.addEventListener('click', (e) => this.removeProduct(e.target));
-        }
+            for (let item of delButton){
+                item.addEventListener('click', (e) => this.removeProduct(e.target));
+            }
+
+        //Изменение элемента в корзине
+        let changeButton = document.getElementsByClassName('changeBasket');
+            for (let item of changeButton){
+                   item.addEventListener('click', (e) => this.changeProduct(e.target));
+            }
 
         if (this.allProducts.length == 0){
             header.innerText = 'В корзине нет товаров';
@@ -349,7 +348,7 @@ class BasketItem extends Item{// класс элемента в корзине
                     <p class="basketItemArt">Арт.: ${this.id_product} </p>
                     <p class="basketItemPrice">Цена: ${this.price} руб.</p>
                     <p class="basketItemQuant">Количество:</p>
-                    <input type="number" value="${this.quantity}" class="basketNum" min="0" max="${this.stock}">
+                    <input type="number" value="${this.quantity}" id="num_${this.id_product}" class="basketNum" min="0" max="${this.stock}">
                     <h3 class="basketItemTotal">ИТОГО: ${this.quantity*this.price} руб.</h3>
                     <a id='change_${this.id_product}' class="changeBasket">Изменить</a>
                     <a id='del_${this.id_product}' class="delBasket">Удалить</a>
