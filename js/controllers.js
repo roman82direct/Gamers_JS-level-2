@@ -216,7 +216,6 @@ class Basket extends List{//класс списка товаров в корзи
                 if(data.result === 1){
                     let productId = element.id.split("_")[1];
                     let find = this.allProducts.find(product => product.id_product == productId);
-                    console.log(find)
                     let newQuant = document.getElementById(`num_${productId}`)
                         find.quantity = parseInt(newQuant.value);
                         this._updateCart(find);
@@ -238,7 +237,7 @@ class Basket extends List{//класс списка товаров в корзи
                         this.allProducts.splice(this.allProducts.indexOf(find), 1);
                         // this.goods.splice(this.goods.indexOf(find), 1);
                         // console.log(this.goods)
-                        console.log(this.allProducts)
+                        // console.log(this.allProducts)
                         document.querySelector(`.basketItem[data-id="card_${productId}"]`).remove();
                         // var total = 0;
                         // for (i = 0; i < this.allProducts.length; i++){
