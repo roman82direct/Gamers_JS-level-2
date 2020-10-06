@@ -11,9 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.1/css/all.css" integrity="sha384-xxzQGERXS00kBmZW/6qxqJPyxW3UR0BPsL4c8ILaIWXva5kFi7TxkIIaMiKtqV1Q" crossorigin="anonymous">
-    <script src="js/goods.js" defer></script>
-    <script src="js/controllers.js" defer></script>
-    <script src="js/script.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/main.js" defer></script>
+    <script src="js/ProductComponent.js" defer></script>
+    <script src="js/BasketComponent.js" defer></script>
+    <script src="js/SearchComponent.js" defer></script>
+    <!-- <script src="js/controllers.js" defer></script>
+    <script src="js/script.js" defer></script> -->
 </head>
 
 <body>
@@ -52,7 +56,7 @@
             </div>
         </div>
     </header>
-    <main>
+    <main id="app">
         <section class="products clearfix"></section>
 
         <div class="modalBasket">
