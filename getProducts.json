@@ -1,0 +1,26 @@
+[
+  {
+    "id_product": 1,
+    "product_name": "Assassin’s creed",
+    "price": 100,
+    "img": "img/assassins/forgallery/ACreed_0.jpg"
+  },
+  {
+    "id_product": 2,
+    "product_name": "world of tanks",
+    "price": 90,
+    "img": "img/woftanks/forgallery/tanks_1.jpg"
+  },
+  {
+    "id_product": 3,
+    "product_name": "world of warships",
+    "price": 85,
+    "img": "img/wofws/forgallery/Ships_0.png"
+  },
+  {
+    "id_product": 5,
+    "product_name": "tomb rider",
+    "price": 125,
+    "img": "img/tomb/forgallery/tomb_0.jpg"
+  }
+]
