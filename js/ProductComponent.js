@@ -1,11 +1,5 @@
 Vue.component('products', {
    props: ['products'],
-    methods: {
-        getImg(){
-            let img = products.img;
-            console.log(img)
-        }
-    },
    template: `<div class="products">
                 <product v-for="item of products" 
                 :key="item.id_product" 

@@ -60,7 +60,7 @@ img {
 }
 .desc {
     border: 1px solid #c0c0c040;
-    padding: 15px;
+    padding-bottom: 15px;
     background-color: rgb(209, 207, 207);
 }
 .desc h3{

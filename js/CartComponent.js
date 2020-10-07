@@ -1,11 +1,8 @@
 Vue.component('cart', {
     props: ['cartItems', 'visibility'],
-    template: `
-        <div class="cart-block" v-show="visibility">
-            <cart-item v-for="item of cartItems" :key="item.id_product" :cart-item="item">
-            </cart-item>
-        </div>
-    `
+    template: `<div class="cart-block" v-show="visibility">
+                    <cart-item v-for="item of cartItems" :key="item.id_product" :cart-item="item"></cart-item>
+                </div>`
 });
 
 Vue.component('cart-item', {
