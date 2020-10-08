@@ -13,26 +13,24 @@
         <div class="cart">
             <search @add-filter="filter"></search>
 
-            <!-- <form action="#" class="search-form" @submit.prevent="filter">
-                <input type="text" class="search-field" v-model="userSearch">
-                <button type="submit" class="btn-search">
-                    <i class="fas fa-search"></i>
-                </button>
-            </form> -->
-
             <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
             
             <cart :cart-items="cartItems"
             :visibility="showCart"
             @remove="remove"></cart>
-
         </div>
     </header>
         <products :products="filtered" @add-product="addProduct"></products>
     </main>
+    <div class="footer">
+        <p class="footertext">&copy; 2017 Historical Games. All rights reserved | Design by W3layouts</p>
+        <search @add-filter="filter"></search>
+    </div>
+    <error :visibility="showError"></error>
 </div>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/RequestErrorComponent.js" defer></script>
     <script src="js/SearchComponent.js"></script>
     <script src="js/ProductComponent.js"></script>
     <script src="js/CartComponent.js"></script>

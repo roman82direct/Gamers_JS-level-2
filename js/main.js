@@ -5,6 +5,7 @@ const app = new Vue({
     el: '#app',
     data: {
         // userSearch: '',
+        showError: '',
         showCart: false,
         catalogUrl: 'getProducts.json',
         cartUrl: 'getBasket.json',
@@ -16,7 +17,9 @@ const app = new Vue({
         getJson(url){
             return fetch(url)
                 .then(result => result.json())
-                .catch(error => console.log(error))
+                .catch(error => {
+                    console.log(error)
+                })
         },
         addProduct(item){
             this.getJson(`${API}/addToBasket.json`)
@@ -31,9 +34,12 @@ const app = new Vue({
                        }
                     }
                 })
+                .catch(error => {
+                    this.showError = error
+                })
         },
         remove(item){
-            this.getJson(`${API}/addToBasket.json`)
+            this.getJson(`${API}/addToBasket1.json`)//убрать 1, чтобы работало(тест RequestErrorComponent)
                 .then(data => {
                     if (data.result === 1) {
                         if(item.quantity>1){
@@ -42,6 +48,9 @@ const app = new Vue({
                             this.cartItems.splice(this.cartItems.indexOf(item), 1);
                         }
                     }
+                })
+                .catch(error => {
+                    this.showError = error
                 })
         },
         filter(userSearch){
@@ -55,18 +64,36 @@ const app = new Vue({
                 for (let item of data.contents){
                     this.$data.cartItems.push(item);
                 }
-            });
+            })
+            .catch(error => {
+                this.showError = error
+            })
+            
         this.getJson(this.catalogUrl)
             .then(data => {
                 for (let item of data){
                     this.$data.products.push(item);
                     this.$data.filtered.push(item);
                 }
-            });
+            })
+            .catch(error => {
+                this.showError = error
+            })
     }
 
 });
 
+window.onclick = function(event) {
+    if (event.target == modalOrder ){
+        modalOrder.style.display = "none";
+    }
+},
+window.onkeydown = (event) => {
+    if (event.code == 'Enter'|| event.code == 'NumpadEnter'|| event.code == 'Escape'){
+        modalOrder.style.display = "none";
+        window.onkeydown = null;
+    }
+}
 
 // class List {
 //     constructor(url, container){

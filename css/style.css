@@ -34,6 +34,7 @@ button:focus{
     align-self: center;
 }
 .products{
+    min-height: 73vh;
     column-gap: 30px;
     display: grid;
     grid-template-columns: repeat(auto-fit, 320px);
@@ -82,9 +83,9 @@ text-transform: uppercase;
     width: 300px;
 }
 
-.invisible{
+/* .invisible{
     display: none;
-}
+} */
 .cart-block:before{
     content: '';
     width: 0;
@@ -154,11 +155,12 @@ text-transform: uppercase;
     font-size: 1.2em;
     position: absolute;
     bottom: 5px;
-    right: 0;
+    right: 0px;
 }
 .search-form{
     position: relative;
     margin-right: 50px;
+    height: 40px;
     display: inline-block;
 }
 .search-field:focus{
@@ -172,4 +174,74 @@ text-transform: uppercase;
     background-color: transparent;
     border: none;
     border-bottom: 2px solid #fafafa;
+}
+.footer {
+    margin: 0 auto;
+    max-width: 1922px;
+    height: 80px;
+    background-color: #000000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+  .footertext {
+    color: #ffffff;
+    font-family: "Arial Narrow";
+    font-size: 16px;
+    font-weight: 400;
+  }
+
+  
+  /* Модальное окно*/
+.modalOrder {
+    /* display: none; */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+    z-index: 1000;
+}
+.modalOrder_content {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe;
+    margin: 8% auto 0;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+    min-height: 30%;
+    z-index: 99999;
+    align-items: center;
+    border-radius: 10px;
+}
+.close_modal_order {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    text-align: end;
+    margin-left: 90%;
+}
+
+.yesNo {
+width: 60%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+margin-top: 2%;
+}
+.ok {
+padding: 5px 10px;
+cursor: pointer;
+font-size: 1 rem;
+font-weight: 400;
+}
+.ok:hover {
+text-shadow: 1px 1px 1px black;
+box-shadow: 1px 1px 1px black;
 }
