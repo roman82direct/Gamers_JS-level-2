@@ -11,7 +11,7 @@
     <header>
         <div class="logo">Gamers_VUE</div>
         <div class="cart">
-            <search :all-products="products" :filter-products="filtered" @filter="filter"></search>
+            <search @add-filter="filter"></search>
 
             <!-- <form action="#" class="search-form" @submit.prevent="filter">
                 <input type="text" class="search-field" v-model="userSearch">

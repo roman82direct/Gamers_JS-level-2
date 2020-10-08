@@ -8,7 +8,7 @@ Vue.component('products', {
 });
 
 Vue.component('product', {
-    props: ['product', 'img'],
+    props: ['product'],
     template: `
             <div class="product-item">
                 <img :src="product.img" alt="Some img">
