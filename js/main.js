@@ -5,7 +5,7 @@ const app = new Vue({
     el: '#app',
     data: {
         // userSearch: '',
-        showError: '',
+        showError: false,
         showCart: false,
         catalogUrl: 'getProducts.json',
         cartUrl: 'getBasket.json',
@@ -82,17 +82,27 @@ const app = new Vue({
     }
 
 });
-
+//---------------------------------------------------------------------------
 window.onclick = function(event) {
     if (event.target == modalOrder ){
         modalOrder.style.display = "none";
+        app.showError = false
     }
 },
 window.onkeydown = (event) => {
-    if (event.code == 'Enter'|| event.code == 'NumpadEnter'|| event.code == 'Escape'){
+    if (event.code == 'Escape'){
         modalOrder.style.display = "none";
-        window.onkeydown = null;
+        app.showError = ''
     }
+}
+
+window.onload = () => {
+    document.getElementById('myform').addEventListener('submit', e => {
+        let valid = new Validator('myform');
+        if(!valid.valid){
+            e.preventDefault();
+        }
+    })
 }
 
 // class List {

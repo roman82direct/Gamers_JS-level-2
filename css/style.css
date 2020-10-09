@@ -34,7 +34,7 @@ button:focus{
     align-self: center;
 }
 .products{
-    min-height: 73vh;
+    /* min-height: 73vh; */
     column-gap: 30px;
     display: grid;
     grid-template-columns: repeat(auto-fit, 320px);
@@ -175,6 +175,134 @@ text-transform: uppercase;
     border: none;
     border-bottom: 2px solid #fafafa;
 }
+.contactpage {
+    clear: both;
+    margin: 0 auto;
+    max-width: 1920px;
+    padding: 20px 0 100px;
+  }
+  .contus {
+    text-align: center;
+    margin-bottom: 89px;
+    color: #f44336;
+    font-family: "Helvetica";
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 48px;
+  }
+  .contform {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 70vw;
+    min-height: 360px;
+    margin: 0 auto;
+  }
+  .myform{
+      width: 600px;
+  }
+  .contbl1 {
+      width: 470px;
+    margin-right: 40px;
+    margin-bottom: 20px;
+  }
+  .getin {
+    color: #f44336;
+    font-family: "Helvetica";
+    font-size: 26px;
+    font-weight: 400;
+    margin: 23px 0 18px;
+  }
+  .allcont {
+    width: 386px;
+    min-height: 201px;
+    color: #9e9e9e;
+    font-family: "Helvetica";
+    font-size: 14px;
+    font-weight: 300;
+    line-height: 17px;
+  }
+  .mail1 {
+    float: left;
+  }
+  .field{
+      display: flex;
+      flex-direction: column;
+  }
+  fieldset .contformtxt {
+    width: 470px;
+    height: 42px;
+    border: 1px solid #999999;
+    color: #838383;
+    font-family: "Helvetica";
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 16px;
+    margin-bottom: 15px;
+  }
+  .message {
+    width: 473px;
+    height: 168px;
+    border: 1px solid #999999;
+    color: #838383;
+    font-family: "Helvetica";
+    font-size: 14px;
+    font-weight: 400;
+    padding-top: 13px;
+    padding-left: 13px;
+    margin-bottom: 14px;
+  }
+  .contbutt {
+    width: 140px;
+    height: 40px;
+    background-color: #f44336;
+    color: #ffffff;
+    font-family: "Helvetica";
+    font-size: 14px;
+    font-weight: 400;
+    text-transform: uppercase;
+    border: none;
+  }
+  .contbutt:hover {
+    box-shadow: 1px 1px 4px black;
+  }
+  fieldset .contformtxt:focus,
+  .message:focus,
+  .contbutt:focus {
+    outline: none;
+    letter-spacing: normal;
+  }
+  .rout {
+    text-align: center;
+    margin-top: 96px;
+    margin-bottom: 25px;
+    color: #f44336;
+    font-family: "Helvetica";
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 48px;
+  }
+  .map1 {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .up {
+    text-decoration: none;
+    width: 40px;
+    height: 40px;
+    margin-right: 55px;
+    position: absolute;
+    margin-left: 93%;
+    margin-top: 55vh;
+    transition: transform 0.8s;
+    -webkit-transition: -webkit-transform 0.8s ease-in-out;
+    -ms-transition: -ms-transform 0.8s ease-in-out;
+  }
+  .up:hover {
+    transform: rotate(90deg);
+    -webkit-transform: rotate(360deg);
+    -webkit-filter: grayscale(100%);
+  }
 .footer {
     margin: 0 auto;
     max-width: 1922px;
@@ -191,6 +319,17 @@ text-transform: uppercase;
     font-weight: 400;
   }
 
+  /* стили ошибок валидации */
+.error-msg{
+    color: red;
+    font-size: 12px;
+  }
+  .invalid{
+    border: 1px solid red!important;
+  }
+  .valid{
+    border: 1px solid green!important;
+  }
   
   /* Модальное окно*/
 .modalOrder {
@@ -209,7 +348,7 @@ text-transform: uppercase;
     display: flex;
     flex-direction: column;
     background-color: #fefefe;
-    margin: 8% auto 0;
+    margin: 10% auto 0;
     padding: 20px;
     border: 1px solid #888;
     width: 30%;
@@ -217,6 +356,10 @@ text-transform: uppercase;
     z-index: 99999;
     align-items: center;
     border-radius: 10px;
+}
+.modalOrder_content h3{
+    margin-top: 15%;
+    color: red;
 }
 .close_modal_order {
     color: #aaa;
@@ -233,7 +376,7 @@ width: 60%;
 display: flex;
 justify-content: space-around;
 align-items: center;
-margin-top: 2%;
+margin-top: 10%;
 }
 .ok {
 padding: 5px 10px;
