@@ -1,6 +1,6 @@
 Vue.component ('navcomp', {
 template: ` <nav class="menubox">
-                <ul class="menu clearfix">
+                <ul class="menu">
                     <li class="menu-list"><a href="#" class="menu-link">Главная</a></li>
                     <li class="menu-list"><a href="#" class="menu-link">О нас</a></li>
                     <li class="menu-list"><a href="#" class="menu-link">Сервис</a></li>

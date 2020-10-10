@@ -7,9 +7,9 @@ class Validator {
             mail: /^[\w._-]+@\w+\.[a-z]{2,4}$/i
         };
         this.errors = {
-            name: 'Имя содержит только буквы',
-            tel: 'Телефон подчиняется шаблону +7(000)000-0000',
-            mail: 'E-mail выглядит как mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru'
+            name: 'Имя должно содержать только буквы',
+            tel: 'Телефон в формате +7(000)000-0000',
+            mail: 'E-mail в формате mymail@mail.ru, или my.mail@mail.ru, или my-mail@mail.ru'
         };
         this.errorClass = 'error-msg';
         this.form = form;
@@ -44,7 +44,7 @@ class Validator {
     }
     _addErrorMsg(field){
         let error = `<div class="${this.errorClass}">${this.errors[field.name]}</div> `;
-        field.parentNode.insertAdjacentHTML('beforeend', error);
+        field.parentNode.insertAdjacentHTML('afterbegin', error);
     }
     _watchField(field){
         field.addEventListener('input', () => {
