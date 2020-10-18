@@ -12,19 +12,24 @@
         <div class="logo">Gamers_VUE</div>
         <navcomp></navcomp>
         <div class="cart">
-            <search @add-filter="filter"></search>
+            <filter-el></filter-el>
+            <cart ref="cart"></cart>
+            <!-- <search @add-filter="filter"></search> -->
 
-            <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
+            <!-- <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
             
             <cart :cart-items="cartItems"
             :visibility="showCart"
-            @remove="remove"></cart>
+            @remove="remove"></cart> -->
         </div>
     </header>
-        <products :products="filtered" @add-product="addProduct"></products>
+    <main>
+        <error ref="error"></error>
+        <products ref="products"></products>
+        <!-- <products :products="filtered" @add-product="addProduct"></products> -->
     </main>
 
-    <error :visible="showError"></error>
+    <!-- <error :visible="showError"></error> -->
 
     <div class="contactpage">
         <p class="contus">Контакты</p>
@@ -70,7 +75,7 @@
     </div>
     <div class="footer">
         <p class="footertext">&copy; 2017 Historical Games. All rights reserved | Design by W3layouts</p>
-        <search @add-filter="filter"></search>
+        <filter-el></filter-el>
     </div>
 </div>
     <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>

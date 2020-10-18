@@ -54,7 +54,9 @@ button:focus{
     letter-spacing: 0.36px;
   }
   /* ----------- */
-
+.cart{
+  display: flex;
+}
 .btn-cart{
     background-color: #fafafa;
     padding: 10px 20px;
