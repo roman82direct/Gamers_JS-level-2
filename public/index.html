@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GAMERS_VUE</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+    <header>
+        <div class="logo">Gamers_VUE</div>
+        <navcomp></navcomp>
+        <div class="cart">
+            <filter-el></filter-el>
+            <cart ref="cart"></cart>
+            <!-- <search @add-filter="filter"></search> -->
+
+            <!-- <button class="btn-cart" type="button" @click="showCart = !showCart">Корзина</button>
+            
+            <cart :cart-items="cartItems"
+            :visibility="showCart"
+            @remove="remove"></cart> -->
+        </div>
+    </header>
+    <main>
+        <error ref="error"></error>
+        <products ref="products"></products>
+        <!-- <products :products="filtered" @add-product="addProduct"></products> -->
+    </main>
+
+    <!-- <error :visible="showError"></error> -->
+
+    <div class="contactpage">
+        <p class="contus">Контакты</p>
+        <a href="#" class="up"><img src="img/arrow.png" alt="Up"></a>
+        <div class="contform">
+            <div class="contbl1">
+                <p class="getin">Контактные данные</p>
+                <div class="allcont">Lorem ipsum dolor sit amet, consectetur adipisicing elit,sheets
+                    containing Lorem Ipsum passages sed do, At vero eos et accusamus et<br>briusto odio digs qui blanditiis <br>
+                    <br>
+                    Leningradsky AVE 39, BLDG 79 <br>
+                    MOSCOW 125167, Russia <br>
+                    <br>
+                    Telephone : +00 111 222 3333 <br>
+                    <br>
+                    FAX : +1 888 888 4444 <br>
+                    <br>
+                    <p class="mail1">Email:&nbsp;</p>
+                    <p class="mailcont">mail@example.com</p>
+                </div>
+
+            </div>
+            <form action="#" id="myform">
+                <fieldset class="field" style="border: none">
+                    <label>
+                        <input type="text" id="name" name="name" class="contformtxt" placeholder="Имя">
+                    </label>
+                    <label>
+                        <input type="text" id="tel" name="tel" class="contformtxt" placeholder="Тел: +7(000)000-0000">
+                    </label>
+                    <label>
+                        <input type="text" id="mail" name="mail" class="contformtxt" placeholder="Email">
+                    </label>   
+                    <textarea class="message" name="message" placeholder="Сообщение"></textarea>
+                    <input type="submit" id="button" class="contbutt" value="ОТПРАВИТЬ">
+                </fieldset>
+            </form>
+        </div>
+        <!-- <p class="rout">Мы на карте</p>
+        <div class="map1">
+            <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A99812b4ff72bd9fb4d073b110b71dd8e28406eb2e9cde29ace19dcde933f4967&amp;width=1169&amp;height=298&amp;lang=ru_RU&amp;scroll=true"></script>
+        </div> -->
+    </div>
+    <div class="footer">
+        <p class="footertext">&copy; 2017 Historical Games. All rights reserved | Design by W3layouts</p>
+        <filter-el></filter-el>
+    </div>
+</div>
+    <script defer src="https://use.fontawesome.com/releases/v5.7.2/js/all.js" integrity="sha384-0pzryjIRos8mFBWMzSSZApWtPl/5++eIfzYmTgBBmXYdhvxPc+XcFEk+zJwDgWbP" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="js/NavComponent.js"></script>
+    <script src="js/FormValidator.js"></script>
+    <script src="js/RequestErrorComponent.js"></script>
+    <script src="js/SearchComponent.js"></script>
+    <script src="js/ProductComponent.js"></script>
+    <script src="js/CartComponent.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
